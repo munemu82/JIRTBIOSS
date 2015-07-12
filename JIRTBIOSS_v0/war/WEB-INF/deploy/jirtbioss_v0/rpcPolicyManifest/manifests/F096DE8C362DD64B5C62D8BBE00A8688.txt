@@ -1,0 +1,2 @@
+serviceClass: jirtbioss.core.client.service.LoginService
+path: 3192FA1E40CF70C249DDF7476DAD902D.gwt.rpc

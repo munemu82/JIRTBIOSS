@@ -1,0 +1,2 @@
+serviceClass: jirtbioss.core.client.service.SpeciesListService
+path: 20B54059573465A054C0D4164D105797.gwt.rpc

@@ -1,0 +1,2 @@
+serviceClass: jirtbioss.core.client.service.SpeciesReportService
+path: 4DE5FA77E5EDE6314AB61F56FDB8882D.gwt.rpc

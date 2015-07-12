@@ -1,0 +1,821 @@
+/*
+LOGO SECTION STYLE
+*/
+.logo {display:block;width:275px;height:75px;text-indent:-5000px;background:url(JIRTBIOS_logo2.png) 0 0 no-repeat}
+	.logo strong {color:#6e3bb9;font-style:italic;}
+
+/*
+BUTTONS
+*/
+.gwt-FileUpload {
+   color: green; 
+}
+.btn {
+  background: #3498db;
+  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+  background-image: -o-linear-gradient(top, #3498db, #2980b9);
+  background-image: linear-gradient(to bottom, #3498db, #2980b9);
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 12px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
+}
+.nextButton {
+  background-image: -webkit-linear-gradient(top, #9fdbff, #2980b9);
+  background-image: -moz-linear-gradient(top, #9fdbff, #2980b9);
+  background-image: -ms-linear-gradient(top, #9fdbff, #2980b9);
+  background-image: -o-linear-gradient(top, #9fdbff, #2980b9);
+  background-image: linear-gradient(to bottom, #9fdbff, #2980b9);
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  font-family: Arial;
+  font-size: 12px;
+  padding: 5px 20px 5px 20px;
+  text-decoration: none;
+}
+
+.nextButton:hover {
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
+}
+/*
+END OF BUTTONS
+*/
+/*
+SOURCE:  Visit http://www.menucool.com/horizontal/javascript-menu for source code and other menu CSS templates 
+FUNCTION: HORIZONTAL MENUBAR
+DATE: 08/03/2015
+*/
+
+#sse50 
+{
+    border: solid 1px #39F;
+    background:#336699 url(mb50_1_bg.gif) repeat-x;
+    padding:0px;/*changing its value will give menu margins to its container*/
+    text-align:center;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+}
+#sses50
+{
+    margin:0 auto;/*If you don't want the menu center aligned, remove this line and above text-align:center*/
+    font-size:0;
+} 
+        
+#sses50 ul, #sses50 li
+{
+    display: inline;
+    list-style-type: none;padding: 0;margin: 0;border:0;background-image:none;
+}
+        
+#sses50 a
+{
+    text-align: center;
+    display: inline-block;
+    font: normal 12px Arial;
+    background: url('mb50_1.gif') no-repeat left top;
+    padding: 10px 20px;/*This defines the size of each menu item*/
+    color: white;
+    text-decoration: none;
+}
+        
+#sses50 a:hover, #sses50 a.current
+{
+    background-position: 0% -60px;
+    color: white;
+}
+#sses50 a.end
+{
+    width:2px;
+    padding-left:0;padding-right:0;
+}
+/*
+END OF HORIZONTAL MENUBAR
+*/
+/*
+HTML , BODY BORDERS AND MAIN CONTENT SECTIONS
+*/
+#htmlStyle{
+	border-color: #0000CC;
+    border-style: solid;
+    border-width: 25px;  
+    background: #0000CC;
+}
+#bodyStyle{
+	 border-style: ridge;
+    border-color: #9fdbff;
+    border-width: 8px;
+     background: #9fdbff;
+     
+}
+.mainSection{
+	width: 800px;
+}
+/*
+END OF HTML , BODY BORDERS AND MAIN CONTENT SECTIONS
+*/
+/*
+TEXT INPUT STYLE
+*/
+.input
+{
+    -webkit-border-radius: 5px; /*For Safari, etc.*/
+    -moz-border-radius: 5px;  /*For Mozilla, etc. */
+    border-radius: 5px; 	/*CSS3 Feature */
+    height: 20px;
+    width:200px;
+    background: #9fdbff;
+   /* margin-left: 20px;*/
+}
+.textAreaInput
+{
+    -webkit-border-radius: 5px; /*For Safari, etc.*/
+    -moz-border-radius: 5px;  /*For Mozilla, etc. */
+    border-radius: 5px; 	/*CSS3 Feature */
+    height: 80px;
+    width:200px;
+    background: #9fdbff;
+}
+.formTextBoxesPanel{
+	margin-left: 30px;
+}
+.formInput{
+	margin-left: 100px;
+	padding: 5px;
+}
+.DropDowninput
+{
+    -webkit-border-radius: 5px; /*For Safari, etc.*/
+    -moz-border-radius: 5px;  /*For Mozilla, etc. */
+    border-radius: 5px; 	/*CSS3 Feature */
+    height: 30px;
+    width:100px;
+    background: #9fdbff;
+    border: 1px solid #3498db;
+}
+/*
+END OF TEXT INPUT STYLE
+*/
+/*
+START OF FOOTER
+*/
+.paddedHorizontalPanel td{
+    padding-left: 20px;
+}
+#footer 
+{
+    border: solid 1px #39F;
+    background:#336699 url(mb50_1_bg.gif) repeat-x;
+    padding:0px;/*changing its value will give menu margins to its container*/
+       border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+        color: white;
+}
+/*
+END OF FOOTER
+*/
+/*START IDENTIFICATION SEARCH FILTER*/
+.toolbar {
+             background: #9fdbff;/*lightgray*/
+             padding: 5px;
+             width:415px;
+              -webkit-border-radius: 5px; /*For Safari, etc.*/
+    -moz-border-radius: 5px;  /*For Mozilla, etc. */
+    border-radius: 5px; 	/*CSS3 Feature */
+    border-color: #3498db;
+         }         
+         .content-container{
+             padding: 10px;
+         }
+         .time-entry{
+             padding: 10px;
+             border-bottom: 1px solid #9fdbff;
+          }
+         .time-entry-right{
+             font-size: 8pt;
+            /* float: right;*/
+             text-align: right;
+          }
+          .ScrollBox {
+            overflow-y: scroll;
+            border: 2px solid #9fdbff;
+            border-radius: 4px;
+            box-shadow: 3px 3px 6px #9fdbff;
+            width: 500px;
+         }
+/*END OF IDENTIFICATION SEARCH FILTER*/
+/*FORM CONTROLS */
+.configCheckBox {
+ width:15px;
+ background:#9fdbff;
+}
+.radio {
+  background: url(radio.png) no-repeat;
+}
+.select {
+  position: absolute;
+  width: 158px;
+  height: 21px;
+  padding: 0 24px 0 8px;
+  color: #fff;
+  font: 12px/21px arial,sans-serif;
+  background: url(select.png) no-repeat;
+  overflow: hidden;
+}
+/*END OF FORM CONTROLS*/
+
+/*Image Identification */
+.imgStyle{
+	margin: 5px;
+    padding: 5px;
+    border: 2px solid #0000ff;
+    height: 350px;
+    width: 500px;
+    
+ 	 -webkit-border-radius: 5px; /*For Safari, etc.*/
+    -moz-border-radius: 5px;  /*For Mozilla, etc. */
+    border-radius: 5px; 	/*CSS3 Feature */
+    border-color: #3498db;
+    
+}
+.tableStyle {
+	width: 900px;
+	  border: 3px solid #9fdbff;
+	-webkit-border-radius: 5px; /*For Safari, etc.*/
+    -moz-border-radius: 5px;  /*For Mozilla, etc. */
+    border-radius: 10px; 	/*CSS3 Feature */
+    border-color: #3498db;
+}
+.tableStyle a {
+	color: blue;
+}
+.tableStyle th {
+	text-align: left;
+	
+}
+
+
+.stripe{
+	background-color: #9fdbff;	
+}
+
+.main_div
+  {
+   background: #9fdbff;
+  padding:20px; width: 500px;
+  }
+.inner_div
+  {
+  background: #fff;
+  margin-top:20px;
+
+  width: 500px;
+  }
+/*
+Define Google button style
+*/
+.Disabledgwt-Button{
+background-color: #FFF;
+	border: 1px solid #3498db;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+	padding: 6px;
+	border-radius: 5px;
+	display: inline-block;
+	position: relative;
+	width: 120px;
+	font-size:15px;
+}
+.Enabledgwt-Button{
+	background-color: #9fdbff;
+	border: 1px solid #3498db;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+	padding: 6px;
+	border-radius: 5px;
+	display: inline-block;
+	position: relative;
+	color:#400040;
+	width: 120px;
+	font-size:15px;
+}
+.Enabledgwt-Button-smallActive{
+	background-color: #00ff80;
+	border: 1px solid #3498db;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+	padding: 6px;
+	border-radius: 5px;
+
+	position: relative;
+	color:#400040;
+	width: 80px;
+	font-size:12px;
+}
+.Enabledgwt-Button-smallDeactive{
+	background-color: #ff0000;
+	border: 1px solid #3498db;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+	padding: 6px;
+	border-radius: 5px;
+position: relative;
+	color:#400040;
+	width: 80px;
+	font-size:12px;
+}
+.deactivateUser {
+	color:#555;
+	border-radius:10px;
+	height:35px;
+	margin:3px;
+	padding:6px 20px;
+	background:#e9ffd9 url('deactivate.png') no-repeat 10px 50%;
+	border:1px solid #a6ca8a
+}
+.UsersIcon-Button{
+	
+	width:50px;height:50px;text-indent:-5000px;background:url(users.PNG) 0 0 no-repeat
+}
+.StudiesIcon-Button{
+	
+	width:50px;height:50px;text-indent:-5000px;background:url(studies1.PNG) 0 0 no-repeat
+}
+.ConfigurationIcon-Button{
+	
+	width:50px;height:50px;text-indent:-5000px;background:url(configuration.PNG) 0 0 no-repeat
+}
+.gwt-Button :hover
+  {
+  cursor:pointer;
+  font-size: 18px;
+  }
+.gwt-TabPanel {
+  margin-top: 4px;
+  padding: 5px;
+font-weight: bold;
+background: #9fdbff;
+cursor: pointer;
+border: 1px solid #999999;
+border-radius: 5px;
+-webkit-box-shadow: 6px 6px 5px #999999;
+-moz-box-shadow: 6px 6px 5px #999999;
+box-shaddow: 6px 6px 5px; #999999;
+}
+.gwt-TabPanelBottom {
+  background-color: white;
+  height:625px;
+  
+}
+
+.gwt-TabBar {
+  padding-top: 2px;
+  border-bottom: 4px solid #878787;
+  background-color: #fff;
+}
+
+.gwt-TabBarItem {
+  cursor: pointer;
+  border-bottom: 2px solid white;
+  margin-right: 2px;
+    padding: 8px;
+font-weight: bold;
+font-size: 15px;
+width:120px;
+color: #0000ff;
+cursor: pointer;
+border: 1px solid #999999;
+border-radius: 5px;
+-webkit-box-shadow: 6px 6px 5px #999999;
+-moz-box-shadow: 6px 6px 5px #999999;
+box-shaddow: 6px 6px 5px; #999999;
+}
+
+.gwt-TabBarItem-selected {
+  padding: 8px;
+  font-weight: bold;
+  cursor: default;
+
+  background-color: #878787;
+  border-bottom: 2px solid #87ffff;
+  margin-right: 2px;
+}
+.gwt-Image{
+border: 5px solid;
+ -webkit-border-radius: 5px; /*For Safari, etc.*/
+    -moz-border-radius: 5px;  /*For Mozilla, etc. */
+    border-radius: 5px; 	/*CSS3 Feature */
+    border-color: #3498db;
+}
+
+
+.customCheckBox{
+											
+background-color: #FFF;
+	border: 1px solid #3498db;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+	padding: 6px;
+	border-radius: 5px;
+	display: inline-block;
+	position: relative;
+	
+}
+.custom-gwt-Button{
+	background-color: #9fdbff;
+	border: 1px solid #3498db;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+	border-radius: 5px;
+	padding: 3px;
+	display: inline-block;
+	position: relative;
+	width: 90px;in
+	font-size:15px;
+}
+.close {
+	padding:10px;
+	margin:10px;
+	margin-left: 50px;
+		display:block;width:40px;height:35px;text-indent:-5000px;background:url(close.png) 0 0 no-repeat}
+/*
+
+FILTERED BUTTON
+*/
+.delete {
+	margin-left: 50px;
+		display:block;width:40px;height:35px;text-indent:-5000px;background:url(close.png) 0 0 no-repeat}
+
+.Filteredgwt-Button{
+	background-color: #80ff00;
+	border: 1px solid #3498db;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+	padding: 6px;
+	border-radius: 5px;
+	display: inline-block;
+	position: relative;
+	color:#400040;
+	width: 120px;
+	font-size:15px;
+}
+
+ /*
+ COLOR FILTERS ICONS
+ */
+.filterIconsRed{
+
+	width:50px;height:50px;text-indent:-5000px;background:url(red_icon.jpg) 0 0 no-repeat
+ }
+  .filterIconsRedClicked{
+ border: 4px solid #80ff00;
+ width:50px;height:50px;text-indent:-5000px;background:url(red_icon.jpg) 0 0 no-repeat
+ }
+ 
+ .filterIconsYellow{
+
+	width:50px;height:50px;text-indent:-5000px;background:url(yellow_icon.png) 0 0 no-repeat
+ }
+  .filterIconsYellowClicked{
+ border: 4px solid #80ff00;
+width:50px;height:50px;text-indent:-5000px;background:url(yellow_icon.png) 0 0 no-repeat
+ }
+ .filterIconsGray{
+
+	width:50px;height:50px;text-indent:-5000px;background:url(gray_icon.jpg) 0 0 no-repeat
+ }
+  .filterIconsGrayClicked{
+ border: 4px solid #80ff00;
+width:50px;height:50px;text-indent:-5000px;background:url(gray_icon.jpg) 0 0 no-repeat
+ }
+ .filterIconsBrown{
+
+	width:50px;height:50px;text-indent:-5000px;background:url(brown_icon.png) 0 0 no-repeat
+ }
+  .filterIconsBrownClicked{
+ border: 4px solid #80ff00;
+	width:50px;height:50px;text-indent:-5000px;background:url(brown_icon.png) 0 0 no-repeat
+ }
+ .filterIconsBlack{
+
+	width:50px;height:50px;text-indent:-5000px;background:url(black_icon.jpg) 0 0 no-repeat
+ }
+ .filterIconsBlackClicked{
+ border: 4px solid #80ff00;
+	width:50px;height:50px;text-indent:-5000px;background:url(black_icon.jpg) 0 0 no-repeat
+ }
+ .filterIconsWhite{
+
+	width:50px;height:50px;text-indent:-5000px;background:url(white_icon.PNG) 0 0 no-repeat
+ }
+ .filterIconsWhiteClicked{
+ border: 4px solid #80ff00;
+ width:50px;height:50px;text-indent:-5000px;background:url(white_icon.PNG) 0 0 no-repeat
+ }
+ /*
+ SCALE FILTERS ICONS
+ */
+ .filterIconsTall{
+
+	width:50px;height:50px;text-indent:-5000px;background:url(tall_icon.PNG) 0 0 no-repeat
+ }
+ .filterIconsTallClicked{
+ border: 4px solid #80ff00;
+	width:50px;height:50px;text-indent:-5000px;background:url(tall_icon.PNG) 0 0 no-repeat
+ }
+  .filterIconsSmall{
+
+	width:50px;height:50px;text-indent:-5000px;background:url(small_icon.PNG) 0 0 no-repeat
+ }
+  .filterIconsSmallClicked{
+ border: 4px solid #80ff00;
+	width:50px;height:50px;text-indent:-5000px;background:url(small_icon.PNG) 0 0 no-repeat
+ }
+  .filterIconsLanky{
+
+	width:50px;height:50px;text-indent:-5000px;background:url(lanky_icon.PNG) 0 0 no-repeat
+ }
+  .filterIconsLankyClicked{
+ border: 4px solid #80ff00;
+	width:50px;height:50px;text-indent:-5000px;background:url(lanky_icon.PNG) 0 0 no-repeat
+ }
+  .filterIconsStocky{
+
+	width:50px;height:50px;text-indent:-5000px;background:url(stocky_icon.PNG) 0 0 no-repeat
+ }
+ .filterIconsStockyClicked{
+ border: 4px solid #80ff00;
+	width:50px;height:50px;text-indent:-5000px;background:url(stocky_icon.PNG) 0 0 no-repeat
+ }
+ /*
+ POSES FILTER ICONS
+ */
+  .filterIconsStraightPose{
+
+	width:50px;height:50px;text-indent:-5000px;background:url(straightPose.PNG) 0 0 no-repeat
+ }
+  .filterIconsStrPoseClicked{
+ border: 4px solid #80ff00;
+ width:50px;height:50px;text-indent:-5000px;background:url(straightPose.PNG) 0 0 no-repeat
+ }
+   .filterIconsRightPose{
+
+	width:50px;height:50px;text-indent:-5000px;background:url(rightPose.PNG) 0 0 no-repeat
+ }
+ .filterIconsRightPoseClicked{
+	border: 4px solid #80ff00;
+	width:50px;height:50px;text-indent:-5000px;background:url(rightPose.PNG) 0 0 no-repeat
+ }
+    .filterIconsLeftPose{
+
+	width:50px;height:50px;text-indent:-5000px;background:url(LeftPose.PNG) 0 0 no-repeat
+ }
+   .filterIconsLeftPoseClicked{
+	border: 4px solid #80ff00;
+	width:50px;height:50px;text-indent:-5000px;background:url(LeftPose.PNG) 0 0 no-repeat
+ }
+    .filterIconsBackTailPose{
+
+	width:50px;height:50px;text-indent:-5000px;background:url(backTailPose.PNG) 0 0 no-repeat
+ }
+  .filterIconsBackTailPoseClicked{
+	border: 4px solid #80ff00;
+	width:50px;height:50px;text-indent:-5000px;background:url(backTailPose.PNG) 0 0 no-repeat
+ }
+ .filterPanel{
+ 	background: lightgray;
+     padding: 3px;
+     width:400px;
+   	-webkit-border-radius: 5px; /*For Safari, etc.*/
+    -moz-border-radius: 5px;  /*For Mozilla, etc. */
+   	 border-radius: 5px; 	/*CSS3 Feature */
+  	 border: 1px solid #3498db;
+ }
+ .identityPanel{
+ margin-left: 100px;
+  
+
+ }
+ .verticalSroll{
+  background-color: #00FFFF;
+    width: 400px;
+    height: 200px;
+    overflow: scroll;
+ }
+ .speciesNames{
+  font-size: 14px; line-height: 2.25em; 
+   text-decoration: underline;
+   text-align: center;
+  }
+  /* Single-direction drop shadow */
+
+hr.myline {
+    height: 12px;
+    border: 0;
+    box-shadow: inset 0 12px 12px -12px rgba(0,0,0,0.5);
+}
+.loginPanel{
+	 margin-left: 50px;
+}
+.error_validation{
+	color: red;
+	font-size:15px;
+}
+
+.TitleLabelStyle{
+	font-size: 14px; line-height: 2.25em; 
+   	text-decoration: underline;
+   	color: blue;
+}
+/* MESSAGES AND NOTIFICATIONS*/
+.error {
+	color:#555;
+	border-radius:10px;
+	font-family:Tahoma,Geneva,Arial,sans-serif;font-size:11px;
+	padding:10px 36px;
+	margin:10px;
+	background:#ffecec url('error.png') no-repeat 10px 50%;
+	border:1px solid #f5aca6;
+}
+.success {
+	color:#555;
+	border-radius:10px;
+	font-family:Tahoma,Geneva,Arial,sans-serif;font-size:11px;
+	padding:10px 36px;
+	margin:10px;
+	background:#e9ffd9 url('success.png') no-repeat 10px 50%;
+	border:1px solid #a6ca8a;
+}
+.add {
+	border-radius:10px;
+	font-family:Tahoma,Geneva,Arial,sans-serif;font-size:11px;
+	padding:10px 35px;
+	margin:10px;
+	background:#e9ffd9 url('add.png') no-repeat 1px 50%;
+	border:1px solid #a6ca8a;
+}
+.display {
+	border-radius:10px;
+	font-family:Tahoma,Geneva,Arial,sans-serif;font-size:11px;
+	padding:10px 35px;
+	margin:10px;
+	background:#e9ffd9 url('display.png') no-repeat 1px 50%;
+	border:1px solid #a6ca8a;
+}
+.upload{
+	border-radius:10px;
+	font-family:Tahoma,Geneva,Arial,sans-serif;font-size:11px;
+	padding:10px 35px;
+	margin:10px;
+	background:#e9ffd9 url('upload.png') no-repeat 1px 50%;
+	border:1px solid #a6ca8a;
+}
+.importCsv {
+	color:#555;
+	border-radius:10px;
+	height:35px;
+	margin:3px;
+	padding:6px 20px;
+	background:url('csvImport.png') no-repeat 10px 50%;
+	border:1px solid #a6ca8a
+}
+.warning {
+	color:#555;
+	border-radius:10px;
+	font-family:Tahoma,Geneva,Arial,sans-serif;font-size:11px;
+	padding:10px 36px;
+	margin:10px;
+	background:#fff8c4 url('warning.png') no-repeat 10px 50%;
+	border:1px solid #f2c779;
+}
+.notice {
+	color:#555;
+	border-radius:10px;
+	font-family:Tahioma,Geneva,Arial,sans-serif;font-size:11px;
+	padding:10px 36px;
+	margin:10px;
+	background:#e3f7fc url('notice.png') no-repeat 10px 50%;
+	border:1px solid #8ed9f6;
+}
+.speciesReportBtn {
+            background: rgb(66, 184, 221); /* this is a light blue */
+            color: white;
+            border-radius: 4px;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+.roundButton
+{
+    -webkit-border-radius: 5px; /*For Safari, etc.*/
+    -moz-border-radius: 15px;  /*For Mozilla, etc. */
+    border-radius:15px; 	/*CSS3 Feature */
+    height: 25px;
+    background: #9fdbff;
+}
+.dockpanel{
+   border: 1px solid #9fdbff;
+	color: #0000ff;
+    width: 800px;     
+}
+.userlist{
+   border: 1px solid #9fdbff;
+	color: #0000ff;
+    width: 400px;     
+}
+.userlistScroll{
+    width: 450px;
+    height: 400px; 
+}
+.speciesDecription{
+    width: 425px;
+    height:85px; 
+}
+.identificationFormScroll{
+	 width: 485px;
+    height:520px;
+}
+.titles{
+	background: #9fdbff;
+	color: #000000;
+	font-size: 20px;
+}
+.subtitles{
+	background: #9fdbff;
+	color: #000000;
+	font-size: 15px;
+}
+.textStyle{
+	background:#ffffff;
+	color:#000000;
+	width:400px;
+	height: 350px;
+}
+.gwt-RadioButton {
+background-color: green;
+border: 1px solid #FFFF00;
+color: white;
+font-size: 1em;
+}
+.gwt-CheckBox {
+background-color: #0080ff;
+border: 1px solid #FFFF00;
+color: #ffffff;
+font-size: 1em;
+}
+.gwt-RadioButton label {  
+    display: inline-block;  
+    cursor: pointer;  
+    position: relative;  
+    padding-left: 15px;  
+    margin-right: 3px;  
+    font-size: 13px;  
+}
+
+input[type=radio] {  
+    display: none;  
+}
+.gwt-RadioButton label:before {  
+    content: "";  
+    display: inline-block;  
+
+    width: 16px;  
+    height: 16px;  
+
+    margin-right: 10px;  
+    position: absolute;  
+    left: 0;  
+    bottombottom: 1px;  
+    background-color: #282E5A;  
+    box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);  
+}
+
+.gwt-RadioButton label:before {  
+    border-radius: 8px;  
+}
+input[type=radio]:checked + label:before {  
+    content: "\2022";  
+    color: aqua;  
+    font-size: 30px;  
+    text-align: center;  
+    line-height: 18px;  
+} 
+
+.reportButton{
+	width:50px;height:50px;text-indent:-5000px;background:url(report.png) 0 0 no-repeat
+}

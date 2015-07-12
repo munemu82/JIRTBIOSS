@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+   <class name="Employee" table="IMAGEIDENTITY">
+      <meta attribute="class-description">
+         This class contains the IMAGEIDENTITY detail. 
+      </meta>
+      <id name="recordId" type="int" column="recordId">
+         <generator class="native"/>
+      </id>
+      <property name="behavior" column="behavior" type="string"/>
+      <property name="number" column="number" type="string"/>
+      <property name="pose" column="pose" type="string"/>
+       <property name="children" column="children" type="char"/>
+        <property name="scale" column="scale" type="string"/>
+         <property name="species" column="species" type="string"/>
+         <property name="user" column="user" type="string"/>
+   </class>
+</hibernate-mapping>

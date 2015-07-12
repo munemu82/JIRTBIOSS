@@ -1,0 +1,2 @@
+serviceClass: jirtbioss.core.client.service.AdminService
+path: 47851E32FD971E2B7422B3E46BCBBB9D.gwt.rpc

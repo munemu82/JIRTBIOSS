@@ -1,0 +1,6 @@
+# Module jirtbioss_v0
+# RPC service class, partial path of RPC policy file
+jirtbioss.core.client.service.SpeciesReportService, 4DE5FA77E5EDE6314AB61F56FDB8882D.gwt.rpc
+jirtbioss.core.client.service.AdminService, 47851E32FD971E2B7422B3E46BCBBB9D.gwt.rpc
+jirtbioss.core.client.service.SpeciesListService, 20B54059573465A054C0D4164D105797.gwt.rpc
+jirtbioss.core.client.service.LoginService, 3192FA1E40CF70C249DDF7476DAD902D.gwt.rpc
