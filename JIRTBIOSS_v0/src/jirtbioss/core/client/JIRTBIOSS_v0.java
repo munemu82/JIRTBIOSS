@@ -21,22 +21,13 @@ import com.google.gwt.user.client.ui.VerticalPanel;
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class JIRTBIOSS_v0 implements EntryPoint {
-	/**
-	 * The message displayed to the user when the server cannot be reached or
-	 * returns an error.
-	 */
-	
-	private static final String SERVER_ERROR = "An error occurred while "
-			+ "attempting to contact the server. Please check your network "
-			+ "connection and try again.";
 
 	/**
 	 * This is the entry point method.
 	 */
-	private Button logoutBtn;
+	private Button logoutBtn;								//Logout button that appear after user logged in
 	private VerticalPanel mainpanel = new VerticalPanel();
 	private Label userNameLabel;
-	private Label securityLabel;
 	private HorizontalPanel infoPanel = new HorizontalPanel();
 	LoginServiceClientImpl loginClientImpl = new LoginServiceClientImpl(GWT.getModuleBaseURL() + "LoginService");
 	
