@@ -1,0 +1,1 @@
+JIRTBIOSS - Java Image Recognition Toolkit for Biosecurity - Is a software developed as my initial phase of Master of Computer Science thesis with its purpose being to enable processing of large number of images faster and efficiently. JIRTBIOSS server as front end for the Automated Object recognition (Animal detection) model to be developed in my thesis.
