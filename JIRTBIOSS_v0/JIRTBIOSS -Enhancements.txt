@@ -1,0 +1,5 @@
+Modifyications
+--------------------
+Update bulkloading of images to include URL/full paths in the DB insert query
+
+
