@@ -2,4 +2,18 @@ Modifyications
 --------------------
 Update bulkloading of images to include URL/full paths in the DB insert query
 
+- DB table and field modifications
+----------------------------------------
+table : imagecaptures
+field : imageID   (from imageName.extension to fullpath/imageName.extension) 
+
+JAVA code modifications - SERVER SIDE
+----------------------
+package: jirtbios.core.server
+class1: AdminServiceImpl
+method(s) affected: importCsv 
+class2 :  SpeciesListServiceImpl
+method(s) affected : getImages
+
+
 
