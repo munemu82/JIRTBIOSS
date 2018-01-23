@@ -7,6 +7,9 @@
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
+-- To run this script, open command line, login to mysql use the following
+-- mysql> source <full directory path to the file>\jirtbios_v1.sql; 
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
@@ -19,7 +22,21 @@ SET time_zone = "+00:00";
 --
 -- Database: `jirtbios_v1`
 --
+CREATE DATABASE IF NOT EXISTS jirtbios_v1;
+-- --------------------------------------------------------
 
+--
+-- Create database user: `jirtbiosadmin` and grant all priveledges
+--
+GRANT USAGE ON *.* TO jirtbiosadmin@localhost IDENTIFIED BY 'jirtbiosadmin';
+GRANT ALL PRIVILEGES ON jirtbios_v1.* TO jirtbiosadmin@localhost;
+FLUSH PRIVILEGES;
+-- --------------------------------------------------------
+
+--
+-- use the database create tables and insert dummy records
+--
+use jirtbios_v1;
 -- --------------------------------------------------------
 
 --
