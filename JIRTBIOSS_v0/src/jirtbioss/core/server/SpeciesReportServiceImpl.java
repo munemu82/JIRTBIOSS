@@ -226,7 +226,7 @@ public class SpeciesReportServiceImpl extends RemoteServiceServlet implements Sp
 		//record type
 				Imageidentity speciesList = new Imageidentity();
 				String speciesNameParameter = '%'+speciesName+'%';
-				 int numberOfRecords = Integer.parseInt(NumOfRecord);
+				 //int numberOfRecords = Integer.parseInt(NumOfRecord);
 				//Setup array list of speciesnames
 						List<Imageidentity> speciesRecords = new ArrayList<Imageidentity>();
 						 try
