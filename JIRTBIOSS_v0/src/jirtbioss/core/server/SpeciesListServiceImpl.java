@@ -25,6 +25,7 @@ import com.mysql.jdbc.PreparedStatement;
 @SuppressWarnings("serial")
 public class SpeciesListServiceImpl extends RemoteServiceServlet implements SpeciesListService {
 	 private Connection connection = DBUtility.getConnection();
+	 private String theImagesFolderPath = DBUtility.getLiveImagesFolderPath();
 
 	@Override
 	public ImagesList getImages() {
@@ -47,7 +48,7 @@ public class SpeciesListServiceImpl extends RemoteServiceServlet implements Spec
 		      while (rs.next())
 		      {
 		    	 // speciesImages.add("imagecaptures/"+rs.getString("imageID")+".jpg");
-		    	  speciesImages.add("imagecaptures/"+rs.getString("imageID"));
+		    	  speciesImages.add(theImagesFolderPath+rs.getString("imageID"));
 		      }
 		      st.close();
 		      

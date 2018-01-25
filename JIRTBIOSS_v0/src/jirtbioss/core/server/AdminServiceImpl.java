@@ -32,7 +32,9 @@ public class AdminServiceImpl extends RemoteServiceServlet implements AdminServi
 	private String thedatetime = date.toString();
 	private String properDate = thedatetime.substring(0, thedatetime.indexOf("."));
 	private java.sql.Date currentDate = new java.sql.Date(new java.util.Date().getTime());
-	
+	private String theImagesFolderPath = DBUtility.getImageFolderPath();
+	//private String liveImagesFolderPath = "/home/amos/eclipse-workspace/JIRTBIOSS_v0/war/imagecaptures/";
+	private String liveImagesFolderPath = DBUtility.getLiveImagesFolderPath();
 	
 	@Override
 	public Users getListOfusers() {
@@ -748,8 +750,9 @@ public class AdminServiceImpl extends RemoteServiceServlet implements AdminServi
 		ImagesList theImage = new ImagesList();
 		ArrayList<String> imageFilenNames = new ArrayList<String>();
 		try(DirectoryStream<Path> ds = 
-				Files.newDirectoryStream(FileSystems.getDefault().getPath("./imagecaptures"))){
-	    	 
+				//Files.newDirectoryStream(FileSystems.getDefault().getPath("./imagecaptures"))){
+				Files.newDirectoryStream(FileSystems.getDefault().getPath(theImagesFolderPath))){
+				
 			try{
 				 
 				 String query = "SELECT * FROM imagecaptures where identificationStatus='n'";
@@ -763,34 +766,43 @@ public class AdminServiceImpl extends RemoteServiceServlet implements AdminServi
 	    	   
 	    	   String afile = p.getFileName().toString();
 	    	  // afile = afile.substring(0, afile.lastIndexOf('.'));		//remove file extension
-	    	   if(rs.getRow() > 0){
-	    	   while (rs.next())
-			      {
-	    		    if(afile.equals(rs.getString("imageID"))){
-	    		    	System.out.println(afile); 
-	    		    }else{
-	    		    	PreparedStatement query1 = (PreparedStatement) connection.prepareStatement("INSERT INTO imagecaptures(imageID, location, sensorID)VALUES(?,?,?)");
-		  			      query1.setString(1, afile);
-		  			      query1.setString(2, "NSW");
-		  			      query1.setString(3, "NSW Sensor");
-		  			     
-		  			     // execute the query, and insert the record to the database
-		  			        query1.executeUpdate();
-		  			      System.out.println(afile); 
-		  			    imageFilenNames.add(afile);
-	    		    }
-			      }
-	    	      
-	    	 }	else{
-	    		 PreparedStatement query1 = (PreparedStatement) connection.prepareStatement("INSERT INTO imagecaptures(imageID, location, sensorID)VALUES(?,?,?)");
- 			      query1.setString(1, afile);
- 			      query1.setString(2, "NSW");
- 			      query1.setString(3, "NSW Sensor");
- 			     
- 			     // execute the query, and insert the record to the database
- 			        query1.executeUpdate();
-	    		 System.out.println(p.getFileName()); 
-	    		 imageFilenNames.add(afile);
+	    	   //if(rs.getRow() > 0){
+	    	 	   //while (rs.next())
+	    	   if(!rs.next()){
+	    		   	  PreparedStatement query1 = (PreparedStatement) connection.prepareStatement("INSERT INTO imagecaptures(imageID, location, sensorID)VALUES(?,?,?)");
+	 			      query1.setString(1, afile);
+	 			      query1.setString(2, "NSW");
+	 			      query1.setString(3, "NSW Sensor");
+	 			     
+	 			     // execute the query, and insert the record to the database
+	 			        query1.executeUpdate();
+		    		 System.out.println(afile); 
+		    		 imageFilenNames.add(afile);
+		    		//Now copy the image to the server folder
+		  			 DBUtility.copyImage(theImagesFolderPath, liveImagesFolderPath, p); 
+			      	   	    	   
+	    	    }	
+	    	   else{
+	    		   do {
+		    		   if(afile.equals(rs.getString("imageID"))){   ///THIS IS THE ROOT CAUSE, THIS IS NOT MATCHING  USE COLLECTION/LIST COMPARE BEFORE TRYING TO INSERT https://stackoverflow.com/questions/19155283/simple-way-to-compare-2-arraylists
+		    		    	System.out.println(afile); 
+		    		    }else{
+		    		    	 System.out.println(afile); 
+		    		    	 System.out.println(rs.getString("imageID"));
+		    		    	PreparedStatement query1 = (PreparedStatement) connection.prepareStatement("INSERT INTO imagecaptures(imageID, location, sensorID)VALUES(?,?,?)");
+			  			      query1.setString(1, afile);
+			  			      query1.setString(2, "NSW");
+			  			      query1.setString(3, "NSW Sensor");
+			  			     
+			  			     // execute the query, and insert the record to the database
+			  			        query1.executeUpdate();
+			  			      System.out.println(afile); 
+			  			    imageFilenNames.add(afile);
+			  			    
+			  			    //Now copy the image to the server folder
+			  			    DBUtility.copyImage(theImagesFolderPath, liveImagesFolderPath, p);  //NOT WORKING!!
+		    		    }
+	    		   }while(rs.next());
 	    	 }
 	    	   
 			}
