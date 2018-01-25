@@ -19,6 +19,7 @@ import jirtbioss.core.client.model.SpeciesCsvReader;
 import jirtbioss.core.client.model.Study;
 import jirtbioss.core.client.model.Users;
 import jirtbioss.core.client.service.AdminService;
+import jirtbioss.core.shared.FilesListComparator;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.mysql.jdbc.PreparedStatement;
@@ -752,67 +753,62 @@ public class AdminServiceImpl extends RemoteServiceServlet implements AdminServi
 		try(DirectoryStream<Path> ds = 
 				//Files.newDirectoryStream(FileSystems.getDefault().getPath("./imagecaptures"))){
 				Files.newDirectoryStream(FileSystems.getDefault().getPath(theImagesFolderPath))){
-				
-			try{
+			   
+				try{
 				 
 				 String query = "SELECT * FROM imagecaptures where identificationStatus='n'";
 				 Statement st1 = connection.createStatement();
 				 ResultSet rs = st1.executeQuery(query);
+				 ArrayList<String> dbImagesList = new ArrayList<String>();
+				 ArrayList<String> newImagesList = new ArrayList<String>();
+				 ArrayList<String> duplicateImagesList = new ArrayList<String>();
+				//CREATE A LIST OF NEW IMAGES
+				 for (Path p : ds) {
+					 String afile = p.getFileName().toString();
+					 newImagesList.add(afile);
+				 }
 				 
-				for (Path p : ds) {
-			
-	    		 // Iterate over the paths in the directory and print filenames
-	    	   
-	    	   
-	    	   String afile = p.getFileName().toString();
-	    	  // afile = afile.substring(0, afile.lastIndexOf('.'));		//remove file extension
-	    	   //if(rs.getRow() > 0){
-	    	 	   //while (rs.next())
-	    	   if(!rs.next()){
-	    		   	  PreparedStatement query1 = (PreparedStatement) connection.prepareStatement("INSERT INTO imagecaptures(imageID, location, sensorID)VALUES(?,?,?)");
-	 			      query1.setString(1, afile);
+				 //GET CURRENT LIST OF IMAGES ALREADY IN THE DATABASE AND CHANGE IF NEW IMAGES LIST HAS IMAGES ALREADY IN DATABASE
+				 if(!rs.next()){
+					 System.out.println("No images in the database");
+				 }else
+				 {
+					 do {
+						 dbImagesList.add(rs.getString("imageID"));
+						 if(newImagesList.contains(rs.getString("imageID"))) {
+							 duplicateImagesList.add(rs.getString("imageID"));
+						 }
+					 }while(rs.next());
+				 }
+				 //REMOVE ANY FOUND DUPLICATE IMAGES FROM THE NEW IMAGES LIST
+				 for(int i=0; i<duplicateImagesList.size();i++) {
+					 System.out.println("Exists already: "+duplicateImagesList.get(i));
+					 imageFilenNames.add(duplicateImagesList.get(i)+": Image already exists");
+					 System.out.println("Removing the duplicate from the new images list");
+					 newImagesList.remove(duplicateImagesList.get(i));
+				 }
+				 //ADD NEW IMAGES TO THE DATABASE
+				 System.out.println("ADDING NEW IMAGES");
+				 for(int j=0; j<newImagesList.size();j++) {
+					 System.out.println(newImagesList.get(j));
+					 //Insert image data to the database
+					 PreparedStatement query1 = (PreparedStatement) connection.prepareStatement("INSERT INTO imagecaptures(imageID, location, sensorID)VALUES(?,?,?)");
+	 			      query1.setString(1, newImagesList.get(j));
 	 			      query1.setString(2, "NSW");
 	 			      query1.setString(3, "NSW Sensor");
 	 			     
 	 			     // execute the query, and insert the record to the database
 	 			        query1.executeUpdate();
-		    		 System.out.println(afile); 
-		    		 imageFilenNames.add(afile);
 		    		//Now copy the image to the server folder
-		  			 DBUtility.copyImage(theImagesFolderPath, liveImagesFolderPath, p); 
-			      	   	    	   
-	    	    }	
-	    	   else{
-	    		   do {
-		    		   if(afile.equals(rs.getString("imageID"))){   ///THIS IS THE ROOT CAUSE, THIS IS NOT MATCHING  USE COLLECTION/LIST COMPARE BEFORE TRYING TO INSERT https://stackoverflow.com/questions/19155283/simple-way-to-compare-2-arraylists
-		    		    	System.out.println(afile); 
-		    		    }else{
-		    		    	 System.out.println(afile); 
-		    		    	 System.out.println(rs.getString("imageID"));
-		    		    	PreparedStatement query1 = (PreparedStatement) connection.prepareStatement("INSERT INTO imagecaptures(imageID, location, sensorID)VALUES(?,?,?)");
-			  			      query1.setString(1, afile);
-			  			      query1.setString(2, "NSW");
-			  			      query1.setString(3, "NSW Sensor");
-			  			     
-			  			     // execute the query, and insert the record to the database
-			  			        query1.executeUpdate();
-			  			      System.out.println(afile); 
-			  			    imageFilenNames.add(afile);
-			  			    
-			  			    //Now copy the image to the server folder
-			  			    DBUtility.copyImage(theImagesFolderPath, liveImagesFolderPath, p);  //NOT WORKING!!
-		    		    }
-	    		   }while(rs.next());
-	    	 }
-	    	   
-			}
+		  			 DBUtility.copyImage(theImagesFolderPath, liveImagesFolderPath, newImagesList.get(j)); 
+					 imageFilenNames.add("New image added: "+newImagesList.get(j));
+				 }
+				 imageFilenNames.add("--------"+newImagesList.size()+" NEW IMAGES ADDED------");    	   
+	    	 
 				 st1.close();
-			}catch (Exception e)
-		    {
+			}catch (Exception e){
 			      System.err.println("Got an exception! ");
 			      System.err.println(e.getMessage());
-			      String st = "Files already there";
-			      imageFilenNames.add(st);
 			    }
 	    	
 	      }catch (IOException e) {
