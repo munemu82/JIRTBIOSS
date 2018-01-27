@@ -1,5 +1,7 @@
 package jirtbioss.core.server;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.FileSystems;
@@ -11,6 +13,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+
+import org.opencv.core.Core;
+import org.opencv.core.CvType;
+import org.opencv.core.Mat;
+
 import jirtbioss.core.client.authentication.AESEncryption;
 import jirtbioss.core.client.model.ImagesList;
 import jirtbioss.core.client.model.Species;
@@ -20,6 +28,7 @@ import jirtbioss.core.client.model.Study;
 import jirtbioss.core.client.model.Users;
 import jirtbioss.core.client.service.AdminService;
 import jirtbioss.core.shared.FilesListComparator;
+import jirtbioss.core.shared.OpencvUtility;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.mysql.jdbc.PreparedStatement;
@@ -36,6 +45,7 @@ public class AdminServiceImpl extends RemoteServiceServlet implements AdminServi
 	private String theImagesFolderPath = DBUtility.getImageFolderPath();
 	//private String liveImagesFolderPath = "/home/amos/eclipse-workspace/JIRTBIOSS_v0/war/imagecaptures/";
 	private String liveImagesFolderPath = DBUtility.getLiveImagesFolderPath();
+	
 	
 	@Override
 	public Users getListOfusers() {
@@ -756,7 +766,8 @@ public class AdminServiceImpl extends RemoteServiceServlet implements AdminServi
 			   
 				try{
 				 
-				 String query = "SELECT * FROM imagecaptures where identificationStatus='n'";
+				 //String query = "SELECT * FROM imagecaptures where identificationStatus='n'";
+				 String query = "SELECT * FROM imagecaptures";
 				 Statement st1 = connection.createStatement();
 				 ResultSet rs = st1.executeQuery(query);
 				 ArrayList<String> dbImagesList = new ArrayList<String>();
@@ -800,8 +811,22 @@ public class AdminServiceImpl extends RemoteServiceServlet implements AdminServi
 	 			     // execute the query, and insert the record to the database
 	 			        query1.executeUpdate();
 		    		//Now copy the image to the server folder
-		  			 DBUtility.copyImage(theImagesFolderPath, liveImagesFolderPath, newImagesList.get(j)); 
-					 imageFilenNames.add("New image added: "+newImagesList.get(j));
+		  			 //DBUtility.copyImage(theImagesFolderPath, liveImagesFolderPath, newImagesList.get(j)); 
+					 
+	 			     imageFilenNames.add("New image added: "+newImagesList.get(j));
+					 
+					 
+					 //OPENCV PROCESSING
+	 			     OpencvUtility opencvobj = new OpencvUtility(theImagesFolderPath+"/"+newImagesList.get(j), liveImagesFolderPath+newImagesList.get(j));	//Create opencv object
+	 			     
+	 			     //1- Opencv operation: grayscale
+	 			     opencvobj.imageToGrayscale();
+	 			     // System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+				      //Mat mat = Mat.eye(3, 3, CvType.CV_8UC1);
+				      //System.out.println("mat = " + mat.dump());
+				      //File input = new File(liveImagesFolderPath+newImagesList.get(j));
+				      //BufferedImage image = ImageIO.read(input);
+				      
 				 }
 				 imageFilenNames.add("--------"+newImagesList.size()+" NEW IMAGES ADDED------");    	   
 	    	 

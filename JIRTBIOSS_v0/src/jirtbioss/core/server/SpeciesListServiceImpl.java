@@ -36,7 +36,8 @@ public class SpeciesListServiceImpl extends RemoteServiceServlet implements Spec
 				 try
 		    {
 		    
-		      String query = "SELECT * FROM imagecaptures where identificationStatus='n'";
+		      //String query = "SELECT * FROM imagecaptures where identificationStatus='n'";
+			  String query = "SELECT * FROM imagecaptures where imageID NoT IN(Select imageID from imageidentity)";
 		 
 		      // create the java statement
 		      Statement st = connection.createStatement();
@@ -154,6 +155,9 @@ public class SpeciesListServiceImpl extends RemoteServiceServlet implements Spec
 		 //success flag 
 	      String insertSuccess = "Failed";
 	      String currentStudy ="DEFAULT00";
+	    //fix imageid which is now = imagecaptures/image_0048.jpg (i.e. including the last folder path)
+	     imageId = imageId.substring(imageId.indexOf("/") + 1);
+		 System.out.println(imageId); 
 		//prepare SQL
 	      try
 		    {
@@ -183,8 +187,9 @@ public class SpeciesListServiceImpl extends RemoteServiceServlet implements Spec
 		      // execute the query, and insert the record to the database
 		        query2.executeUpdate();
 		      
+		        
 		      //SECOND QUERY TO UPDATE THE IMAGE CAPTURE TO MAKE SURE THAT
-		      PreparedStatement query3 = (PreparedStatement) connection.prepareStatement("Update imagecaptures set identificationStatus = ? where imageId = ?");
+		      PreparedStatement query3 = (PreparedStatement) connection.prepareStatement("Update imagecaptures set identificationStatus = ? where imageID = ?");
 		      query3.setString(1, "y");
 		      query3.setString(2, imageId);
 		      //execute the second query to update the identified image 
