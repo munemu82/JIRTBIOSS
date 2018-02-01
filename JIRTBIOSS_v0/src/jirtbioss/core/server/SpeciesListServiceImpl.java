@@ -26,6 +26,8 @@ import com.mysql.jdbc.PreparedStatement;
 public class SpeciesListServiceImpl extends RemoteServiceServlet implements SpeciesListService {
 	 private Connection connection = DBUtility.getConnection();
 	 private String theImagesFolderPath = DBUtility.getLiveImagesFolderPath();
+	//private String liveImagesFolderPath = "/home/amos/eclipse-workspace/JIRTBIOSS_v0/war/imagecaptures/";
+	private String identifiedImagesFolder = DBUtility.getIdentifiedImagesFolderPath();
 
 	@Override
 	public ImagesList getImages() {
@@ -196,6 +198,9 @@ public class SpeciesListServiceImpl extends RemoteServiceServlet implements Spec
 		      query3.executeUpdate(); 
 		       st.close();
 		       insertSuccess = "Success";
+		       
+		       //Now try to copy/move the identified image to the identified images
+		       DBUtility.copyImage(theImagesFolderPath, identifiedImagesFolder, imageId,true);
 		    }
 	
 		    catch (Exception e)

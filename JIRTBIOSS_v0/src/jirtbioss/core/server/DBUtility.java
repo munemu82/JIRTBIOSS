@@ -19,6 +19,7 @@ public class DBUtility {
  private static Connection connection = null;
  private static String imageFolderPath = null;
  private static String liveImageDirPath = null;
+ private static String identifiedImgpath = null;
  //Global properties
  private static Properties prop = new Properties();
  private static InputStream inputStream = DBUtility.class.getClassLoader().getResourceAsStream("/db.properties");
@@ -82,13 +83,31 @@ public class DBUtility {
         }
 
     }
+    //This method is used to the identified images folder path from the db.properties configuration file
+    public static String getIdentifiedImagesFolderPath() {
+        if (identifiedImgpath != null)
+            return identifiedImgpath;
+        else {
+            try {
+            	prop.load(inputStream);
+            	identifiedImgpath = prop.getProperty("identifiedImagesFolder");
+            }catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return identifiedImgpath;
+        }
+
+    }
     //This method is used to copy image from one the uploaded folder to the application live folder
-    public static void copyImage(String srcDir, String distFolder, Path file) throws IOException {
+    public static void copyImage(String srcDir, String distFolder, String file, Boolean isCopyMove) throws IOException {
     	InputStream is = null;
         OutputStream os = null;
     	try {
     		Path dir = FileSystems.getDefault().getPath(srcDir);
-	        File sourceFile = new File(dir+"/"+file.getFileName());
+	        //File sourceFile = new File(dir+"/"+file.getFileName());
+    		File sourceFile = new File(dir+"/"+file);
 	        File destFile = new File(distFolder + sourceFile.getName());
 	        is = new FileInputStream(sourceFile);			//Source file
 	        os = new FileOutputStream(destFile);			//Destination file
@@ -97,11 +116,25 @@ public class DBUtility {
 	        while ((length = is.read(buffer)) > 0) {
 	            os.write(buffer, 0, length);
 	        }
+	      //try to delete the file
+	       if(isCopyMove==true) {
+	    	   if(sourceFile.delete())
+		        {
+		            System.out.println(file+" File deleted successfully");
+		        }
+		        else
+		        {
+		            System.out.println(file+" Failed to delete the file");
+		        }
+	       }
+	       
     	}
 	    finally {
 	        is.close();
 	        os.close();
 	    }
+    	
+    	
     }
        
 

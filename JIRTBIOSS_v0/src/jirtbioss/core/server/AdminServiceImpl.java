@@ -28,7 +28,9 @@ import jirtbioss.core.client.model.Study;
 import jirtbioss.core.client.model.Users;
 import jirtbioss.core.client.service.AdminService;
 import jirtbioss.core.shared.FilesListComparator;
-import jirtbioss.core.shared.OpencvUtility;
+import jirtbioss.core.shared.ImageProcessor;
+import jirtbioss.core.server.OpencvUtility;
+//import jirtbioss.core.shared.OpencvUtility;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.mysql.jdbc.PreparedStatement;
@@ -815,13 +817,18 @@ public class AdminServiceImpl extends RemoteServiceServlet implements AdminServi
 					 
 	 			     imageFilenNames.add("New image added: "+newImagesList.get(j));
 					 
-					 
+					 ImageProcessor imgProcessorObj = new ImageProcessor();
+					 //Perform RGB to Grayscale
+					 imgProcessorObj.convertRGBtoGrayccale(theImagesFolderPath+"/"+newImagesList.get(j), liveImagesFolderPath+newImagesList.get(j));
 					 //OPENCV PROCESSING
-	 			     OpencvUtility opencvobj = new OpencvUtility(theImagesFolderPath+"/"+newImagesList.get(j), liveImagesFolderPath+newImagesList.get(j));	//Create opencv object
-	 			     
+	 			    //System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+	 			    //System.out.println("ERROR OCCURS IN THE BELOW CODE");
+	 			    //System.out.println("OpenCV Native Loaded successfully");
+	 			    // OpencvUtility opencvobj = new OpencvUtility(theImagesFolderPath+"/"+newImagesList.get(j), liveImagesFolderPath+newImagesList.get(j));	//Create opencv object
+	 			    // System.out.println("ERROR OCCURS IN THE BELOW CODE section 2");
 	 			     //1- Opencv operation: grayscale
-	 			     opencvobj.imageToGrayscale();
-	 			     // System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+	 			    // opencvobj.imageToGrayscale();
+	 			  
 				      //Mat mat = Mat.eye(3, 3, CvType.CV_8UC1);
 				      //System.out.println("mat = " + mat.dump());
 				      //File input = new File(liveImagesFolderPath+newImagesList.get(j));
