@@ -1,7 +1,6 @@
 package jirtbioss.core.server;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.FileSystems;
@@ -13,11 +12,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.imageio.ImageIO;
-
 import org.opencv.core.Core;
-import org.opencv.core.CvType;
-import org.opencv.core.Mat;
 
 import jirtbioss.core.client.authentication.AESEncryption;
 import jirtbioss.core.client.model.ImagesList;
@@ -27,13 +22,19 @@ import jirtbioss.core.client.model.SpeciesCsvReader;
 import jirtbioss.core.client.model.Study;
 import jirtbioss.core.client.model.Users;
 import jirtbioss.core.client.service.AdminService;
-import jirtbioss.core.shared.FilesListComparator;
+import jirtbioss.core.shared.CsvFeatureExtractor;
+import jirtbioss.core.shared.DBUtility;
 import jirtbioss.core.shared.ImageProcessor;
-import jirtbioss.core.server.OpencvUtility;
-//import jirtbioss.core.shared.OpencvUtility;
+import jirtbioss.core.shared.JirtbiossLogger;
+import jirtbioss.core.shared.OpencvUtility;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.mysql.jdbc.PreparedStatement;
+
+import boofcv.io.UtilIO;
+import boofcv.io.image.ConvertBufferedImage;
+import boofcv.io.image.UtilImageIO;
+import boofcv.struct.image.GrayF32;
 
 @SuppressWarnings("serial")
 public class AdminServiceImpl extends RemoteServiceServlet implements AdminService{
@@ -44,9 +45,19 @@ public class AdminServiceImpl extends RemoteServiceServlet implements AdminServi
 	private String thedatetime = date.toString();
 	private String properDate = thedatetime.substring(0, thedatetime.indexOf("."));
 	private java.sql.Date currentDate = new java.sql.Date(new java.util.Date().getTime());
+	//private ArrayList<String> listOfImagesInDir;
 	private String theImagesFolderPath = DBUtility.getImageFolderPath();
+	private int[] imageSizeProperties = DBUtility.getImageSizeProperties();
+	private String loggingLevelProperty = DBUtility.getLoggingLevel();
+	private String histogramEqualizaton = DBUtility.getImageHistProperty();
+	private String imagegrayscale = DBUtility.getImageGrayScaleProperty();
+	
 	//private String liveImagesFolderPath = "/home/amos/eclipse-workspace/JIRTBIOSS_v0/war/imagecaptures/";
 	private String liveImagesFolderPath = DBUtility.getLiveImagesFolderPath();
+	private boolean isTraining = DBUtility.isForTraining();
+	
+	//Logging variables
+	private JirtbiossLogger jirbiossLogging = new JirtbiossLogger("JIRTBIOSS", loggingLevelProperty);
 	
 	
 	@Override
@@ -817,34 +828,45 @@ public class AdminServiceImpl extends RemoteServiceServlet implements AdminServi
 					 
 	 			     imageFilenNames.add("New image added: "+newImagesList.get(j));
 					 
-					 ImageProcessor imgProcessorObj = new ImageProcessor();
+	 			     //ImageProcessor object creation - all low level image processing functions need to be implemented there
+					//ImageProcessor imgProcessorObj = new ImageProcessor();
+					 
 					 //Perform RGB to Grayscale
-					 imgProcessorObj.convertRGBtoGrayccale(theImagesFolderPath+"/"+newImagesList.get(j), liveImagesFolderPath+newImagesList.get(j));
+					//imgProcessorObj.convertRGBtoGrayccale(theImagesFolderPath+"/"+newImagesList.get(j), liveImagesFolderPath+newImagesList.get(j));
+					 
 					 //OPENCV PROCESSING
-	 			    //System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+	 			    System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 	 			    //System.out.println("ERROR OCCURS IN THE BELOW CODE");
-	 			    //System.out.println("OpenCV Native Loaded successfully");
-	 			    // OpencvUtility opencvobj = new OpencvUtility(theImagesFolderPath+"/"+newImagesList.get(j), liveImagesFolderPath+newImagesList.get(j));	//Create opencv object
+	 			   System.out.println("OpenCV Native Loaded successfully");
+	 			   OpencvUtility opencvobj = new OpencvUtility(theImagesFolderPath+"/"+newImagesList.get(j), liveImagesFolderPath+newImagesList.get(j));	//Create opencv object
 	 			    // System.out.println("ERROR OCCURS IN THE BELOW CODE section 2");
-	 			     //1- Opencv operation: grayscale
-	 			    // opencvobj.imageToGrayscale();
-	 			  
-				      //Mat mat = Mat.eye(3, 3, CvType.CV_8UC1);
-				      //System.out.println("mat = " + mat.dump());
-				      //File input = new File(liveImagesFolderPath+newImagesList.get(j));
-				      //BufferedImage image = ImageIO.read(input);
-				      
+	 			   
+	 			   //Perform image processing operation based on userdefined properties
+	 			   if(histogramEqualizaton.toUpperCase().equals("Y")) {
+	 				  opencvobj.imageHistEqualize();
+	 			   }else if(imagegrayscale.toUpperCase().equals("Y")) {
+	 				  opencvobj.imageToGrayscale(); 
+	 			   }else {
+	 				   DBUtility.copyImage(theImagesFolderPath, liveImagesFolderPath, newImagesList.get(j), false);
+	 			   }
+	 			    
+				    
 				 }
-				 imageFilenNames.add("--------"+newImagesList.size()+" NEW IMAGES ADDED------");    	   
+				 imageFilenNames.add("--------"+newImagesList.size()+" NEW IMAGES ADDED------");  
+				
 	    	 
 				 st1.close();
 			}catch (Exception e){
 			      System.err.println("Got an exception! ");
 			      System.err.println(e.getMessage());
+			       //LOGGING
+	  	 	 	    this.jirbiossLogging.performLoggig("AdminServiceImpl", "getImagesName",e.getMessage() + " Error processing image(s)");
+	  	 	 	    //END OF LOGGING
 			    }
 	    	
 	      }catch (IOException e) {
 	    	   e.printStackTrace();
+	    	   this.jirbiossLogging.performLoggig("AdminServiceImpl", "getImagesName", "Missing image directory path "+e.getMessage());
 	    	}
 		
 		theImage.setImageNames(imageFilenNames);
@@ -947,7 +969,68 @@ public class AdminServiceImpl extends RemoteServiceServlet implements AdminServi
 	    } 
 		return returnMessage;
 	}
-
 	
-
+	// FEATURE EXTRACTION IMPLEMENTATION
+	@Override
+	public String extractFeatures(String featureType) {
+		ArrayList<ArrayList<Double>> featuresDataSet = new ArrayList<>();
+		String extractionStatus = "";
+		try(DirectoryStream<Path> currentImageDir = 
+				//Files.newDirectoryStream(FileSystems.getDefault().getPath("./imagecaptures"))){
+				Files.newDirectoryStream(FileSystems.getDefault().getPath(theImagesFolderPath))){
+			   
+				try{
+					//CHECKING CURRENT LIST
+					System.out.println("PRINTING THE LIST IN THE IMAGECAPTURES DIRECTORY");
+					for (Path p : currentImageDir) {
+						//prepare require variables
+						 ArrayList<Double> featuresVector = new ArrayList<>();
+						 String afile = p.getFileName().toString();
+						 System.out.println(afile);
+						 BufferedImage buffered = UtilImageIO.loadImage(UtilIO.pathExample(theImagesFolderPath+"/"+afile));
+						 
+						 //Performed required image processing before feature extraction
+						 ImageProcessor imgProcessorObj = new ImageProcessor();			//create image processor object
+						 imgProcessorObj.setHeight(imageSizeProperties[0]);				//set the height of image
+						 imgProcessorObj.setWidth(imageSizeProperties[1]);	            //set the Width of image
+						 BufferedImage resizedImg = imgProcessorObj.resize(buffered);	// resize the input image using image processor object
+						 
+						 GrayF32 imageInput = ConvertBufferedImage.convertFrom(resizedImg,(GrayF32)null);
+						
+						 //Create feature extractor object
+						 FeatureExtractor myfeatExtractor = new FeatureExtractor();
+						 System.out.println("Test feature extract");
+						 
+						 featuresVector = myfeatExtractor.ComputeDenseFeatures(imageInput,featureType);
+						 System.out.println("Test feature extract2");
+						 featuresDataSet.add(featuresVector);
+					 }
+					 //Add features to the CSV file
+					System.out.println("CSV file creation step");
+					CsvFeatureExtractor featuresToCsvObj = new CsvFeatureExtractor(DBUtility.getTempStoreFolder()+"/"+featureType+"Features2CSV.csv");
+					featuresToCsvObj.featuresToCsv(featuresDataSet);
+					
+					extractionStatus = featureType + " feature extraction completed successfully !";
+					
+					//Test arFF
+					System.out.println(featuresDataSet.get(1).get(1));
+					featuresToCsvObj.saveArff(featuresToCsvObj.createArff(featuresDataSet, isTraining));
+					
+				}catch (Exception e){
+				      System.err.println("Got an exception! ");
+				      System.err.println(e.getCause());
+				     e.printStackTrace();
+				      System.err.println(e.getMessage());
+				       //LOG Errors here 
+				      	this.jirbiossLogging.performLoggig("AdminServiceImpl", "extractFeatures", e.getMessage());
+		  	 	 	   //END OF LOGGING
+				  }
+		} catch (IOException e) {
+	    	   e.printStackTrace();
+	    	   this.jirbiossLogging.performLoggig("AdminServiceImpl", "extractFeatures", e.getMessage());
+	   }
+		 
+		return extractionStatus;
+		
+	}
 }

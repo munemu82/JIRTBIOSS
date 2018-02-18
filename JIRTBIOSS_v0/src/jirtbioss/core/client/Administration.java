@@ -56,7 +56,7 @@ public class Administration extends Composite{
 		private TextBox email = new TextBox(); 
 		private ListBox userAccessLevel = new ListBox();
 	private ScrollPanel centerPanelScroll = new ScrollPanel();
-	 //-----------------------------Studies--------------------------------------------------
+	 //-----------------------------Studies Widgets-------------------------------------------------
 	 private Button listStudiesBtn = new Button("Studies");
 	 private Button addStudyBtn = new Button("Add Study");
 	 private Button editStudyBtn= new Button("Save Study");
@@ -69,7 +69,7 @@ public class Administration extends Composite{
 	 private DateBox studyEndDateTxtBx = new DateBox(); 
 	 private TextBox studySpeciesTxtBx = new TextBox(); 
 	 private Button studyConfigListBtn = new Button("Display Configs");
-	 //-------------------------------Configuration -------------------------------------------
+	 //-------------------------------Configuration Widgets-------------------------------------------
 	 private Button listConfigBtn = new Button("Configurations");
 	 private Button addSpecies = new Button("Add species");
 	 private Button addImagePathsBtn = new Button("Load Images");
@@ -84,9 +84,14 @@ public class Administration extends Composite{
 	 private TextBox speciesIdTxtBx = new TextBox(); 
 	 private TextBox speciesNameTxtBx = new TextBox(); 
 	 private TextArea speciesDescTxtBx = new TextArea(); 
-		private TextBox speciesSimilar1TxtBx = new TextBox(); 
-		 private TextBox speciesSimilar2TxtBx = new TextBox();
-		 private TextBox speciesSimilar3TxtBx = new TextBox();
+	 private TextBox speciesSimilar1TxtBx = new TextBox(); 
+	 private TextBox speciesSimilar2TxtBx = new TextBox();
+	 private TextBox speciesSimilar3TxtBx = new TextBox();
+	 
+	 //Feature Extraction Widgets
+	 private Button extractHogFeatBtn = new Button("HOG features");
+	 private Button extractSiftFeatBtn = new Button("SIFT features");
+	 private Button extractLbpFeatBtn = new Button("LBP features");
 	 
 	 //Dynamic values and commponents
 	 VerticalPanel userPanel = new VerticalPanel();
@@ -122,6 +127,10 @@ public class Administration extends Composite{
 	     addUserBtn.setStyleName("add");addStudyBtn.setStyleName("add");addSpecies.setStyleName("add");addLooksLikeBtn.setStyleName("add");
 	     listSpeciesBtn.setStyleName("display");studyConfigListBtn.setStyleName("display");
 	     addImagePathsBtn.setStyleName("upload");
+	     extractHogFeatBtn.setStyleName("extract");
+	     extractSiftFeatBtn.setStyleName("extract");
+	     extractLbpFeatBtn.setStyleName("extract");
+	     //extractHogFeatBtn.setStyleName("download");
 	     
 	     // This is the first North component
 	     dockPanel.add(new HTML("<h1> JIRTBIOSS ADMINISTRATION </h1> <hr />"), 
@@ -169,6 +178,9 @@ public class Administration extends Composite{
 	      this.addLooksLikeBtn.addClickHandler(new AddLooksLikeBtnClickHandler());
 	      this.studyConfigListBtn.addClickHandler(new StudyConfigListBtnClickHandler());
 	      this.addImagePathsBtn.addClickHandler(new AddImagePathsBtnClickHndler());
+	      this.extractHogFeatBtn.addClickHandler(new ExtractHogFeatBtnClickHandler());
+	      this.extractSiftFeatBtn.addClickHandler(new ExtractSiftFeatBtnClickHandler());
+	      this.extractLbpFeatBtn.addClickHandler(new ExtractLbpBtnClickHandler());
 	      
 	}
 	//Method called when listUsersBtn Button is clicked
@@ -788,6 +800,8 @@ public class Administration extends Composite{
 				Window.alert(activation + " is activated successfully!!");
 			}
 		}
+		
+		//Implement Upload images button, this code get executed when Administrator presses the Upload images button
 		private class AddImagePathsBtnClickHndler implements ClickHandler{
 
 			@Override
@@ -797,11 +811,52 @@ public class Administration extends Composite{
 			}
 			
 		}
+		//FEATURE EXTRACTION BUTTONS IMPLEMENTATIONS
+		private class ExtractHogFeatBtnClickHandler implements ClickHandler{		//This is for HOG Feature extraction implementation
+
+			@Override
+			public void onClick(ClickEvent event) {
+				selectedButtonsPanel.clear();
+				adminServiceImpl.extractFeatures("HOG");
+				
+			}
+			
+		}
+		private class ExtractSiftFeatBtnClickHandler implements ClickHandler{
+
+			@Override
+			public void onClick(ClickEvent event) {
+				selectedButtonsPanel.clear();
+				adminServiceImpl.extractFeatures("SIFT");
+			}
+			
+		}
+		private class ExtractLbpBtnClickHandler implements ClickHandler{
+
+			@Override
+			public void onClick(ClickEvent arg0) {
+				selectedButtonsPanel.clear();
+				adminServiceImpl.extractFeatures("LBP");
+			}
+			
+		}
+		
+		public void featureExtractStatus(String extractStatus) {
+			selectedButtonsPanel.clear();
+			Label featExtractStatusLbl = new Label(extractStatus);
+			selectedButtonsPanel.add(featExtractStatusLbl);
+		}
+		
 		public void displayLoadedImages(ImagesList theList){
 			ArrayList<String> currentImageNames = theList.getImageNames();
 			for(int i=0; i < currentImageNames.size(); i++){
 				Label imageNameLbl = new Label(currentImageNames.get(i));
 				selectedButtonsPanel.add(imageNameLbl);
+			}
+			if(currentImageNames.size() > 1) {
+				configButtons.add(extractHogFeatBtn);
+				configButtons.add(extractSiftFeatBtn);
+				configButtons.add(extractLbpFeatBtn);
 			}
 			
 		}

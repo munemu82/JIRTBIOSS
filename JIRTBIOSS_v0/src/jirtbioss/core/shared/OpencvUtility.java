@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
+import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 
 /*
@@ -25,8 +26,6 @@ public class OpencvUtility {
 		super();
 		this.sourceImgPath = sourceImgPath;
 		this.destImagPath = destImagPath;
-		//load opencv object
-		System.loadLibrary( Core.NATIVE_LIBRARY_NAME );
 	}
 	
 	//GETTERS AND SETTERS OF THE OPENCVUTILITY OBJECT
@@ -46,7 +45,7 @@ public class OpencvUtility {
 	//CONVERT IMAGE TO GRAYSCALE
 	public void imageToGrayscale() {
 		   try {
-		         
+			   	// System.loadLibrary( Core.NATIVE_LIBRARY_NAME );  // Linux issue with Native runtime execution Need further investigation
 		         File input = new File(this.sourceImgPath);
 		         BufferedImage image = ImageIO.read(input);	
 
@@ -70,7 +69,20 @@ public class OpencvUtility {
 		      }
 		   
 	   }
-	
+	//PERFORM IMAGE HISTOGRAM EQUALIZATION
+	public void imageHistEqualize() {
+		try {
+			Mat source = Imgcodecs.imread(this.sourceImgPath, Imgcodecs.CV_LOAD_IMAGE_GRAYSCALE);
+			Mat destination = new Mat(source.rows(),source.cols(),source.type());
+			
+			Imgproc.equalizeHist(source, destination);
+			Imgcodecs.imwrite(this.destImagPath, destination);
+				
+		} catch (Exception e) {
+	         System.out.println("Error: " + e.getMessage());
+		}
+		
+	}
 	
 
 }

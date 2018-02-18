@@ -168,6 +168,11 @@ public class AdminServiceClientImpl implements AdminServiceClientInt{
 	public void activateUser(String username) {
 		this.service.activateUser(username, new ActivateUserAsync());
 	}
+	@Override
+	public void extractFeatures(String featureType) {
+		this.service.extractFeatures(featureType, new ExtractFeaturesAsync());
+		
+	}
 
 	//ADMIN GUIs
 	public Administration getAdminGui(){
@@ -188,6 +193,7 @@ public class AdminServiceClientImpl implements AdminServiceClientInt{
 	public StudyConfig getStudyConfigGui(){
 		return this.studyConfigGui;
 	}
+
 	
 	//class to implement result from the server implementations on the client
 private class AdminCallback implements AsyncCallback{
@@ -472,6 +478,27 @@ private class AdminAsyncImpl implements AsyncCallback{
 				adminGui.displayUserActive(activeUserStatus);
 			}
 						
+		}
+		
+	}
+	
+	//FEATURE EXTRACTION CLIENT IMPLEMENTATION
+	private class ExtractFeaturesAsync implements AsyncCallback{
+
+		@Override
+		public void onFailure(Throwable caught) {
+			System.out.println("Error occurred extracting features from image with the server");
+			adminGui.featureExtractStatus("Server Error occurred extracting features from image");
+			
+		}
+
+		@Override
+		public void onSuccess(Object result) {
+			// TODO Auto-generated method stub
+			if(result instanceof String){
+				String featExtractStatus = (String) result;
+				adminGui.featureExtractStatus(featExtractStatus);
+			}
 		}
 		
 	}

@@ -687,6 +687,14 @@ hr.myline {
 	background:#e9ffd9 url('upload.png') no-repeat 1px 50%;
 	border:1px solid #a6ca8a;
 }
+.extract{
+	border-radius:10px;
+	font-family:Tahoma,Geneva,Arial,sans-serif;font-size:11px;
+	padding:10px 35px;
+	margin:10px;
+	background:#e9ffd9 url('download.png') no-repeat 1px 50%;
+	border:1px solid #a6ca8a;
+}
 .importCsv {
 	color:#555;
 	border-radius:10px;

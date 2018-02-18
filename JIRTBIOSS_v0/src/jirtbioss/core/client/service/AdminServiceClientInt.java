@@ -31,4 +31,5 @@ public interface AdminServiceClientInt {
 	void deActivateStudy(String studyId);
 	void deactivateUser(int userId);
 	void activateUser(String username);
+	void extractFeatures(String featureType);
 }

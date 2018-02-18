@@ -42,7 +42,7 @@ public class Logout extends Composite{
 	public void logoutServer(String userID){
 		//check user logged session
 	
-		//Cookies.removeCookie("username");
+		Cookies.removeCookie("username");
 	}
 	private class LogoutbtnClickHandler implements ClickHandler{
 
@@ -52,8 +52,8 @@ public class Logout extends Composite{
 			mainpanel.clear();
 			
 			//Set cookies to current time and therefore user neeed to relogin to access the system
-			Date expires = new Date (System.currentTimeMillis());
-			Cookies.setCookie("username", Cookies.getCookie("username"), expires, null, "/", true);
+			//Date expires = new Date (System.currentTimeMillis());
+			//Cookies.setCookie("username", Cookies.getCookie("username"), expires, null, "/", true);
 		
 		}
 	}

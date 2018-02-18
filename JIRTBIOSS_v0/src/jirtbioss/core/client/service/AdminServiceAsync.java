@@ -34,4 +34,5 @@ public interface AdminServiceAsync {
 	void deActivateStudy(String studyId, AsyncCallback callback);
 	void deactivateUser(int userId, AsyncCallback callback);
 	void activateUser(String username, AsyncCallback callback);
+	void extractFeatures(String featureType, AsyncCallback callback);
 }

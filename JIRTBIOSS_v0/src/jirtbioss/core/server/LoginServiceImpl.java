@@ -17,35 +17,12 @@ import java.util.logging.SimpleFormatter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-import jirtbioss.core.client.authentication.AESEncryption;
+ import jirtbioss.core.client.authentication.AESEncryption;
 import jirtbioss.core.client.model.Users;
 import jirtbioss.core.client.service.LoginService;
+import jirtbioss.core.shared.DBUtility;
 import jirtbioss.core.shared.FieldVerifier;
+import jirtbioss.core.shared.JirtbiossLogger;
 
 import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -58,7 +35,10 @@ import com.mysql.jdbc.PreparedStatement;
 public class LoginServiceImpl extends RemoteServiceServlet implements LoginService {
 	private ArrayList<String> currentLoggedUsers = new ArrayList<String>();
 	private String loggedInUser;
-	 private Connection connection = DBUtility.getConnection();
+	private Connection connection = DBUtility.getConnection();
+	//Logging variables
+	private String loggingLevelProperty = DBUtility.getLoggingLevel();
+	private JirtbiossLogger jirbiossAuthLogging = new JirtbiossLogger("JIRTBIOSS_AUTH", loggingLevelProperty);
 
 	 
  
@@ -98,7 +78,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
   	 	 			this.loggedInUser = name;
   	 	 			this.currentLoggedUsers.add(this.loggedInUser);
   	 	 		//BELOW is Logging the user who logged in the application successfully
-  	 	 		File file = new File("./Logs/JirtBiossLogin.log");
+  	 	 		/*File file = new File("./Logs/JirtBiossLogin.log");
   	 	 		String dirPath = file.getAbsoluteFile().getParentFile().getAbsolutePath();
   	 	 		//dirPath+"/JirtBiossLogin.log"
   	 	 		FileHandler logFile = new FileHandler("Logs/JirtBiossLogin.log", 1024 * 1024, 1, true);
@@ -108,7 +88,8 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
   	 	 	    LOGGER.addHandler(logFile);
   	 	 	    LOGGER.setLevel(Level.INFO);
   	 	 	    LOGGER.info(result + " logged in successfully");
-  	 	 	    logFile.close();
+  	 	 	    logFile.close();*/
+  	 	 		this.jirbiossAuthLogging.performLoggig("LoginServiceImpl", "login", result + " logged in successfully");
   	 	 	    //END OF LOGGING
  			     }else{
  			    	result = "username and password does not match our databae";
@@ -119,7 +100,8 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 		    {
 			      System.err.println("Got an exception! ");
 			      System.err.println(e.getMessage());
-			    }
+			      this.jirbiossAuthLogging.performLoggig("LoginServiceImpl", "login", result + " authentication failed! "+e.getMessage());
+		    }
  		}
 		return result;
 		}
@@ -142,10 +124,16 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 		HttpServletRequest request = this.getThreadLocalRequest();
 		// dont create a new one -> false
 		HttpSession session = request.getSession(false);
-		if (session == null)
-			return getUserName();;
+		
+		if (session == null) 
+			return getUserName();
 		// do some logout stuff ...
+		//HttpSession httpSession = getThreadLocalRequest().getSession(false);
+		//session.setMaxInactiveInterval(0);
+		//session.setAttribute("userName", null);
 		session.invalidate();
+		//setUserName("");
+		this.jirbiossAuthLogging.performLoggig("LoginServiceImpl", "logout", getUserName() + " Logout from server");
 		return getUserName();
 	}
  
@@ -173,7 +161,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 	@Override
 	public void setUserName(String userName) {
 		HttpSession httpSession = getThreadLocalRequest().getSession(true);
-		httpSession.setMaxInactiveInterval(1000 * 60 *2);
+		httpSession.setMaxInactiveInterval(1 * 60 *60);
 	     httpSession.setAttribute("userName", userName);
 	     
 	}

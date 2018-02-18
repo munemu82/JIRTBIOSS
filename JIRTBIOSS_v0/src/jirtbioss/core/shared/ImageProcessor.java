@@ -1,6 +1,8 @@
 package jirtbioss.core.shared;
 
 import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
@@ -72,6 +74,21 @@ public class ImageProcessor {
 	         
 	      } catch (Exception e) {}
 	   }
-	   
+	
+	//Perform image resizing
+	public BufferedImage resize(BufferedImage img) {
+        Image tmp = img.getScaledInstance(this.width, this.height, Image.SCALE_SMOOTH);
+        BufferedImage resized = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = resized.createGraphics();
+        g2d.drawImage(tmp, 0, 0, null);
+        g2d.dispose();
+        return resized;
+    }
+	//Perform image histogram equalization - for contrast enhancement
+	public BufferedImage imageEqualized(BufferedImage img) {
+		BufferedImage equalizedImg = img;
+		
+		return equalizedImg;
+	}
 
 }
