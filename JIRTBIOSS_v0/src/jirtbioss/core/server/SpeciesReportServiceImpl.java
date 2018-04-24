@@ -10,6 +10,7 @@ import jirtbioss.core.client.model.Imageidentity;
 import jirtbioss.core.client.model.SpeciesCsvReport;
 import jirtbioss.core.client.model.Study;
 import jirtbioss.core.client.service.SpeciesReportService;
+import jirtbioss.core.shared.DBUtility;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.mysql.jdbc.PreparedStatement;

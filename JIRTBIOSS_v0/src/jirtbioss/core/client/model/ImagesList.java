@@ -3,6 +3,8 @@ package jirtbioss.core.client.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import org.opencv.core.Core;
+
 public class ImagesList implements Serializable{
 
 	//Fields
@@ -28,6 +30,7 @@ public class ImagesList implements Serializable{
 	}
 
 	public String[] getImages() {
+		//System.loadLibrary( Core.NATIVE_LIBRARY_NAME );
 		return images;
 	}
 

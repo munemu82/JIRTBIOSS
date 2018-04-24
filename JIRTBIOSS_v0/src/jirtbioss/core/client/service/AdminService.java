@@ -41,5 +41,6 @@ public interface AdminService extends RemoteService{
 	public String deActivateStudy(String studyId);
 	public String deactivateUser(int userId);
 	public String activateUser(String username);
-	public String extractFeatures(String featureType);
+	public String extractFeatures(String featureType, String classLabel);
+	
 }

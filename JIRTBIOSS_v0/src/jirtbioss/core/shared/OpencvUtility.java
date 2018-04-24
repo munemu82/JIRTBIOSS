@@ -3,12 +3,15 @@ package jirtbioss.core.shared;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
+import org.opencv.core.Size;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 
@@ -19,15 +22,33 @@ import org.opencv.imgproc.Imgproc;
 public class OpencvUtility {
 	private String sourceImgPath;		//input image full path
 	private String destImagPath;			//final processed image full path
+	private int width;
+	private int height;
+	
+	//Logging properties
+	private String loggingLevelProperty = DBUtility.getLoggingLevel();
+	private JirtbiossLogger jirbiossLogging = new JirtbiossLogger("JIRTBIOSS", loggingLevelProperty);
 	
 	
 	//CONSTRUCTOR OF THE OPENCVUTILITY OBJECT
 	public OpencvUtility(String sourceImgPath, String destImagPath) {
 		super();
+		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 		this.sourceImgPath = sourceImgPath;
 		this.destImagPath = destImagPath;
 	}
 	
+	//Consutructor with all fields
+	public OpencvUtility(String sourceImgPath, String destImagPath, int width, int height) {
+		super();
+		 System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+		this.sourceImgPath = sourceImgPath;
+		this.destImagPath = destImagPath;
+		this.width = width;
+		this.height = height;
+	}
+
+
 	//GETTERS AND SETTERS OF THE OPENCVUTILITY OBJECT
 	public String getSourceImgPath() {
 		return sourceImgPath;
@@ -84,5 +105,72 @@ public class OpencvUtility {
 		
 	}
 	
+	//IMAGE PRE-PROCESSING TASKS
+	//---------------------------------------------------------------------------
+	//Image resize
+	public BufferedImage getResizedImg() {
+		Mat sourceImg = Imgcodecs.imread(this.sourceImgPath, Imgcodecs.CV_LOAD_IMAGE_COLOR);
+		Size size = new Size(this.width, this.height);
+		Mat resized = new Mat();
+		Imgproc.resize(sourceImg, resized, size, 0, 0, Imgproc.INTER_NEAREST);
+		byte[] data1 = new byte[resized.rows() * resized.cols() * (int)(resized.elemSize())];
+		resized.get(0, 0, data1);
+		BufferedImage finalBufferedImg = new BufferedImage(resized.cols(),resized.rows(), BufferedImage.TYPE_3BYTE_BGR);
+		finalBufferedImg.getRaster().setDataElements(0, 0, resized.cols(), resized.rows(), data1);
+		return finalBufferedImg;
+	}
+	//image file format/extension conversion and copy to the live folder destination
+	public void copyImage(String fileName, String destFolderPath) {
+		Imgcodecs imageCodecs = new Imgcodecs(); 
+		Mat matrix;
+		List<String> supportedImageFormats = new ArrayList<String>();
+		supportedImageFormats.add("jpg");supportedImageFormats.add("jpeg");supportedImageFormats.add("gif");
+		supportedImageFormats.add("png");supportedImageFormats.add("tif");supportedImageFormats.add("tiff");
+		try {
+						
+			 if(fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0) {
+				String fileExtension = fileName.substring(fileName.lastIndexOf(".")+1);
+				if(supportedImageFormats.contains(fileExtension)) {
+					matrix = imageCodecs.imread(this.sourceImgPath);
+					if(!fileExtension.toUpperCase().equals("JPG")&& !fileExtension.toUpperCase().equals("JPEG")) {
+						Imgcodecs.imwrite(destFolderPath+fileName+".jpg", matrix);
+					}else {
+						System.out.println(fileExtension);
+						Imgcodecs.imwrite(destFolderPath+fileName, matrix);
+					}
+				}else {
+					//log the processing error here
+					this.jirbiossLogging.performLoggig("OpenCvUtility", "copyImage", "Image reading file as is not supported");	
+				}
+				
+			} 
+			 
+		}catch (Exception e) {
+			 e.printStackTrace();
+			//log the file loading and processing error here
+            this.jirbiossLogging.performLoggig("OpenCvUtility", "copyImage", "Image reading and writing failed due to " +e.getMessage());
+            //this.jirbiossLogging.performLoggig("OpenCvUtility", "copyImage", "DETAILED ERROR:"+ e);
+		}
+		
+	}
+	public String getJpgFileExtension(String fileName) {
+		List<String> supportedImageFormats = new ArrayList<String>();
+		supportedImageFormats.add("jpg");supportedImageFormats.add("jpeg");supportedImageFormats.add("gif");
+		supportedImageFormats.add("png");supportedImageFormats.add("tif");supportedImageFormats.add("tiff");
+		String formatedFileName ="";
+		if(fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0) {
+			String fileExtension = fileName.substring(fileName.lastIndexOf(".")+1);
+			if(supportedImageFormats.contains(fileExtension)) {
+				
+				if(!fileExtension.toUpperCase().equals("JPG")&& !fileExtension.toUpperCase().equals("JPEG")) {
+					formatedFileName = fileName+".jpg";
+				}else {
+					formatedFileName = fileName;
+				}
+			}
+		}
+		return formatedFileName;
+	}
+	//END OF IMAGE PRE-PROCESSING TASKS
 
 }

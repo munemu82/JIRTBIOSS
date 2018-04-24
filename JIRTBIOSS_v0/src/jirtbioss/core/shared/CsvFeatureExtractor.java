@@ -21,7 +21,7 @@ public class CsvFeatureExtractor {
 	private String fileName;
 	private static final String COMMA_DELIMITER = ",";
 	private static final String NEW_LINE_SEPARATOR = "\n";
-	private String theImagesFolderPath = DBUtility.getImageFolderPath();
+	//private String theImagesFolderPath = DBUtility.getImageFolderPath();
 	private String tempStorageFolder = DBUtility.getTempStoreFolder();
 	
 	public CsvFeatureExtractor(String fileName) {
@@ -44,7 +44,7 @@ public class CsvFeatureExtractor {
 	}
 	
 	//Save the features into csv file
-	public void featuresToCsv(ArrayList<ArrayList<Double>> featuresList) {
+	public void featuresToCsv(ArrayList<ArrayList<Double>> featuresList, Boolean isForPredict, String classLabel) {
 		//populate the CSV
 		try {
 			
@@ -62,7 +62,9 @@ public class CsvFeatureExtractor {
 				}
 				
 				//Add folder name as a class for the image - means it is good idea for user to specify a folder that represents the containing images 
-				this.fileWriter.append(this.getClassName(theImagesFolderPath));
+				if(isForPredict==true) {
+					this.fileWriter.append(this.getClassName(classLabel));
+				}
 				this.fileWriter.append(NEW_LINE_SEPARATOR);
 			}
 		}	catch (Exception e) {
@@ -83,21 +85,21 @@ public class CsvFeatureExtractor {
 		}
 	}
 	//THIS IS EXTENSION TO EXTRACT ALSO ARFF FILE FOR MODEL TRAINING
-	public Instances createArff(ArrayList<ArrayList<Double>> featureVecData, Boolean isForPredict) {
+	public Instances createArff(ArrayList<ArrayList<Double>> featureVecData, Boolean isForPredict, String classLabel) {
 		//1- Create List of features 
 		ArrayList<Attribute> attributeList = new ArrayList<Attribute>(2);
 		 final List<String> classes = new ArrayList<String>() {
 	            {
 	                add("None");
-	                add(getClassName(theImagesFolderPath));
-	                add("Dingo");
+	                add(getClassName(classLabel));
+	                add("SomethingElse");
 	            }
 	        };
 		for(int i=0; i < featureVecData.get(1).size(); i++) {
 			attributeList.add(new Attribute("feature"+Integer.toString(i)));
 		}
 		if(isForPredict==true) {
-			 classes.add(this.getClassName(theImagesFolderPath));
+			 //classes.add(this.getClassName(theImagesFolderPath));
 			 Attribute attributeClass = new Attribute("@@class@@", classes);
 			 attributeList.add(attributeClass);
 		}
@@ -133,7 +135,7 @@ public class CsvFeatureExtractor {
 	}
 	
 	//THIS METHOD IS TO SAVE ARFF FILE GIVEN A LIST OF INSTANCES
-	public void saveArff(Instances dataInstances) {
+	public void saveArff(Instances dataInstances, String featureName, String classLabel) {
 		//process feature vector into an ARFF file
         NonSparseToSparse nonSparseToSparseInstance = new NonSparseToSparse(); 
 
@@ -145,7 +147,7 @@ public class CsvFeatureExtractor {
 
 	         arffSaverInstance.setInstances(sparseDataset); 
 
-	         arffSaverInstance.setFile(new File(tempStorageFolder+"/JIRTBIOSS.arff")); 
+	         arffSaverInstance.setFile(new File(tempStorageFolder+"/"+classLabel+"_"+featureName+"-JIRTBIOSS.arff")); 
 
 	         arffSaverInstance.writeBatch();
 		} catch (Exception e) {

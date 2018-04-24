@@ -12,8 +12,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.opencv.core.Core;
-
 import jirtbioss.core.client.authentication.AESEncryption;
 import jirtbioss.core.client.model.ImagesList;
 import jirtbioss.core.client.model.Species;
@@ -59,6 +57,9 @@ public class AdminServiceImpl extends RemoteServiceServlet implements AdminServi
 	//Logging variables
 	private JirtbiossLogger jirbiossLogging = new JirtbiossLogger("JIRTBIOSS", loggingLevelProperty);
 	
+	//Image preprocessing variables
+	ImageProcessor imgProcessorObj = new ImageProcessor();			//create image processor object
+		
 	
 	@Override
 	public Users getListOfusers() {
@@ -341,16 +342,23 @@ public class AdminServiceImpl extends RemoteServiceServlet implements AdminServi
 			String speciesDesc, String speciesLookslike1,
 			String speciesLookslike2, String speciesLookslike3) {
 			String returnMessage ="";
+			String pose = "";
+			String color = "";
+			String scale = "";
+			
 		  try{
 			  Statement st = connection.createStatement();
-		    	  PreparedStatement query = (PreparedStatement) connection.prepareStatement("INSERT INTO species(speciesId, speciesName, speciesDescription, lookslike1, lookslike2, lookslike3) VALUES(?,?,?,?,?,?)");
+		    	  PreparedStatement query = (PreparedStatement) connection.prepareStatement("INSERT INTO species(speciesId, speciesName, speciesDescription, pose, colour, scale, lookslike1, lookslike2, lookslike3) VALUES(?,?,?,?,?,?,?,?,?)");
 				   
 			    	 query.setString(1, speciesID);
 			    	  query.setString(2, speciesName);
 			    	  query.setString(3, speciesDesc);
-			    	  query.setString(4, speciesLookslike1);
-			    	  query.setString(5, speciesLookslike2);
-			    	  query.setString(6, speciesLookslike3);
+			    	  query.setString(4, pose);
+			    	  query.setString(5, color);
+			    	  query.setString(6, scale);
+			    	  query.setString(7, speciesLookslike1);
+			    	  query.setString(8, speciesLookslike2);
+			    	  query.setString(9, speciesLookslike3);
 			    	  query.executeUpdate();
 		  
 	       st.close();
@@ -789,7 +797,9 @@ public class AdminServiceImpl extends RemoteServiceServlet implements AdminServi
 				//CREATE A LIST OF NEW IMAGES
 				 for (Path p : ds) {
 					 String afile = p.getFileName().toString();
-					 newImagesList.add(afile);
+					 OpencvUtility opencvprocessingObj = new OpencvUtility(theImagesFolderPath+"/"+afile, liveImagesFolderPath+afile);	//Create opencv object
+					 String formatedFile = opencvprocessingObj.getJpgFileExtension(afile);
+					 newImagesList.add(formatedFile);
 				 }
 				 
 				 //GET CURRENT LIST OF IMAGES ALREADY IN THE DATABASE AND CHANGE IF NEW IMAGES LIST HAS IMAGES ALREADY IN DATABASE
@@ -815,9 +825,16 @@ public class AdminServiceImpl extends RemoteServiceServlet implements AdminServi
 				 System.out.println("ADDING NEW IMAGES");
 				 for(int j=0; j<newImagesList.size();j++) {
 					 System.out.println(newImagesList.get(j));
+					 //OPENCV PROCESSING
+	 			     OpencvUtility opencvobj = new OpencvUtility(theImagesFolderPath+"/"+newImagesList.get(j), liveImagesFolderPath+newImagesList.get(j));	//Create opencv object
+	 			    // System.out.println("ERROR OCCURS IN THE BELOW CODE section 2");
+	 			   
+					 //Perform a check here before insert to the database
+					 
 					 //Insert image data to the database
+	 			     String imageFileName = opencvobj.getJpgFileExtension(newImagesList.get(j));
 					 PreparedStatement query1 = (PreparedStatement) connection.prepareStatement("INSERT INTO imagecaptures(imageID, location, sensorID)VALUES(?,?,?)");
-	 			      query1.setString(1, newImagesList.get(j));
+	 			      query1.setString(1, imageFileName);
 	 			      query1.setString(2, "NSW");
 	 			      query1.setString(3, "NSW Sensor");
 	 			     
@@ -827,27 +844,16 @@ public class AdminServiceImpl extends RemoteServiceServlet implements AdminServi
 		  			 //DBUtility.copyImage(theImagesFolderPath, liveImagesFolderPath, newImagesList.get(j)); 
 					 
 	 			     imageFilenNames.add("New image added: "+newImagesList.get(j));
-					 
-	 			     //ImageProcessor object creation - all low level image processing functions need to be implemented there
-					//ImageProcessor imgProcessorObj = new ImageProcessor();
-					 
-					 //Perform RGB to Grayscale
-					//imgProcessorObj.convertRGBtoGrayccale(theImagesFolderPath+"/"+newImagesList.get(j), liveImagesFolderPath+newImagesList.get(j));
-					 
-					 //OPENCV PROCESSING
-	 			    System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-	 			    //System.out.println("ERROR OCCURS IN THE BELOW CODE");
-	 			   System.out.println("OpenCV Native Loaded successfully");
-	 			   OpencvUtility opencvobj = new OpencvUtility(theImagesFolderPath+"/"+newImagesList.get(j), liveImagesFolderPath+newImagesList.get(j));	//Create opencv object
-	 			    // System.out.println("ERROR OCCURS IN THE BELOW CODE section 2");
-	 			   
+					  
+					
 	 			   //Perform image processing operation based on userdefined properties
 	 			   if(histogramEqualizaton.toUpperCase().equals("Y")) {
 	 				  opencvobj.imageHistEqualize();
 	 			   }else if(imagegrayscale.toUpperCase().equals("Y")) {
 	 				  opencvobj.imageToGrayscale(); 
 	 			   }else {
-	 				   DBUtility.copyImage(theImagesFolderPath, liveImagesFolderPath, newImagesList.get(j), false);
+	 				   //DBUtility.copyImage(theImagesFolderPath, liveImagesFolderPath, newImagesList.get(j), false);
+	 				  opencvobj.copyImage(newImagesList.get(j),liveImagesFolderPath);
 	 			   }
 	 			    
 				    
@@ -972,7 +978,7 @@ public class AdminServiceImpl extends RemoteServiceServlet implements AdminServi
 	
 	// FEATURE EXTRACTION IMPLEMENTATION
 	@Override
-	public String extractFeatures(String featureType) {
+	public String extractFeatures(String featureType, String classLabel) {
 		ArrayList<ArrayList<Double>> featuresDataSet = new ArrayList<>();
 		String extractionStatus = "";
 		try(DirectoryStream<Path> currentImageDir = 
@@ -990,11 +996,8 @@ public class AdminServiceImpl extends RemoteServiceServlet implements AdminServi
 						 BufferedImage buffered = UtilImageIO.loadImage(UtilIO.pathExample(theImagesFolderPath+"/"+afile));
 						 
 						 //Performed required image processing before feature extraction
-						 ImageProcessor imgProcessorObj = new ImageProcessor();			//create image processor object
-						 imgProcessorObj.setHeight(imageSizeProperties[0]);				//set the height of image
-						 imgProcessorObj.setWidth(imageSizeProperties[1]);	            //set the Width of image
-						 BufferedImage resizedImg = imgProcessorObj.resize(buffered);	// resize the input image using image processor object
-						 
+						 OpencvUtility newOpencvobj = new OpencvUtility(theImagesFolderPath+"/"+afile, liveImagesFolderPath+afile, imageSizeProperties[0], imageSizeProperties[1]);
+						 BufferedImage resizedImg = newOpencvobj.getResizedImg();
 						 GrayF32 imageInput = ConvertBufferedImage.convertFrom(resizedImg,(GrayF32)null);
 						
 						 //Create feature extractor object
@@ -1007,14 +1010,14 @@ public class AdminServiceImpl extends RemoteServiceServlet implements AdminServi
 					 }
 					 //Add features to the CSV file
 					System.out.println("CSV file creation step");
-					CsvFeatureExtractor featuresToCsvObj = new CsvFeatureExtractor(DBUtility.getTempStoreFolder()+"/"+featureType+"Features2CSV.csv");
-					featuresToCsvObj.featuresToCsv(featuresDataSet);
+					CsvFeatureExtractor featuresToCsvObj = new CsvFeatureExtractor(DBUtility.getTempStoreFolder()+"/"+classLabel+"_"+featureType+"Features2CSV.csv");
+					featuresToCsvObj.featuresToCsv(featuresDataSet, isTraining, classLabel);
 					
 					extractionStatus = featureType + " feature extraction completed successfully !";
 					
 					//Test arFF
 					System.out.println(featuresDataSet.get(1).get(1));
-					featuresToCsvObj.saveArff(featuresToCsvObj.createArff(featuresDataSet, isTraining));
+					featuresToCsvObj.saveArff(featuresToCsvObj.createArff(featuresDataSet, isTraining, classLabel), featureType, classLabel);
 					
 				}catch (Exception e){
 				      System.err.println("Got an exception! ");

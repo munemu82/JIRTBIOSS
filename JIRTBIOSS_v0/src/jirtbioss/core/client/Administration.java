@@ -13,6 +13,8 @@ import jirtbioss.core.client.service.AdminServiceClientImpl;
 import jirtbioss.core.client.ui.AddLooksLike;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
@@ -48,14 +50,14 @@ public class Administration extends Composite{
 	 private Button editUserBtn = new Button("Save");
 	 private Label activateUserBtn = new Label("Activate User");
 	 private Label userAcessLvlLbl= new Label("User Access Level:");
-		 private TextBox userID = new TextBox(); 
-		private TextBox username = new TextBox();
-		private PasswordTextBox password = new PasswordTextBox(); 
-		private TextBox firstname = new TextBox(); 
-		private TextBox lastname = new TextBox(); 
-		private TextBox email = new TextBox(); 
-		private ListBox userAccessLevel = new ListBox();
-	private ScrollPanel centerPanelScroll = new ScrollPanel();
+	 private TextBox userID = new TextBox(); 
+	 private TextBox username = new TextBox();
+	 private PasswordTextBox password = new PasswordTextBox(); 
+	 private TextBox firstname = new TextBox(); 
+	 private TextBox lastname = new TextBox(); 
+	 private TextBox email = new TextBox(); 
+	 private ListBox userAccessLevel = new ListBox();
+	 private ScrollPanel centerPanelScroll = new ScrollPanel();
 	 //-----------------------------Studies Widgets-------------------------------------------------
 	 private Button listStudiesBtn = new Button("Studies");
 	 private Button addStudyBtn = new Button("Add Study");
@@ -89,17 +91,25 @@ public class Administration extends Composite{
 	 private TextBox speciesSimilar3TxtBx = new TextBox();
 	 
 	 //Feature Extraction Widgets
-	 private Button extractHogFeatBtn = new Button("HOG features");
-	 private Button extractSiftFeatBtn = new Button("SIFT features");
-	 private Button extractLbpFeatBtn = new Button("LBP features");
+	 private Button featuresExtractBtn = new Button("Extract Features");
+	 private ListBox speciesListBox = new ListBox();
+	 private ListBox featuresListBox = new ListBox();
+	 private Label speciesListLabel = new Label("List Of Species:");
+	 private Label featureListLabel = new Label("List Of features:");
 	 
+	 //Dynamic variables
+	 private String selectedSpecies = "";
+	 private String selectedFeature = "";
+	 
+		 
 	 //Dynamic values and commponents
-	 VerticalPanel userPanel = new VerticalPanel();
-	 VerticalPanel studyPanel = new VerticalPanel();
-	 VerticalPanel configPanel = new VerticalPanel();
-	 VerticalPanel speciesPanel = new VerticalPanel();
-	 HorizontalPanel buttonsPanel = new HorizontalPanel();
-	 Label WestPanelTitile = new Label();
+	 private VerticalPanel userPanel = new VerticalPanel();
+	 private VerticalPanel studyPanel = new VerticalPanel();
+	 private VerticalPanel configPanel = new VerticalPanel();
+	 private VerticalPanel speciesPanel = new VerticalPanel();
+	 private HorizontalPanel buttonsPanel = new HorizontalPanel();
+	 private Label WestPanelTitile = new Label();
+	 private VerticalPanel featureExtractPanel = new VerticalPanel();
 	 
 	public Administration(AdminServiceClientImpl theAdminImpl){
 		//initializing the widgets
@@ -110,6 +120,7 @@ public class Administration extends Composite{
 		
 		//initialize the RPC client implementation
 		this.adminServiceImpl = theAdminImpl;
+		
 		//Commponents and Buttons styles
 		dockPanel.setStyleName("dockpanel");
 	     dockPanel.setSpacing(5);
@@ -127,10 +138,26 @@ public class Administration extends Composite{
 	     addUserBtn.setStyleName("add");addStudyBtn.setStyleName("add");addSpecies.setStyleName("add");addLooksLikeBtn.setStyleName("add");
 	     listSpeciesBtn.setStyleName("display");studyConfigListBtn.setStyleName("display");
 	     addImagePathsBtn.setStyleName("upload");
-	     extractHogFeatBtn.setStyleName("extract");
-	     extractSiftFeatBtn.setStyleName("extract");
-	     extractLbpFeatBtn.setStyleName("extract");
-	     //extractHogFeatBtn.setStyleName("download");
+	     featuresExtractBtn.setStyleName("extract");
+	     speciesListBox.setStyleName("DropDowninput");
+	     featuresListBox.setStyleName("DropDowninput");
+	     configButtons.setSize("400px", "100px");
+	     
+	     //ADD LIST OF SPECIES TO LIST BOX
+	     speciesListBox.addItem("");
+	    
+		 //ADD LIST OF FEATURES TO LIST BOX
+		 featuresListBox.addItem("");
+		 featuresListBox.addItem("Hog");
+		 featuresListBox.addItem("Sift");
+		 featuresListBox.addItem("Lbp");
+		 
+		 //Add Features extraction widget to the features panel
+		 this.featureExtractPanel.add(speciesListLabel);
+		 this.featureExtractPanel.add(speciesListBox);			//adding the list of species Selection box
+		 this.featureExtractPanel.add(featureListLabel);
+		 this.featureExtractPanel.add(featuresListBox);			//adding the list of features Selection box
+		 this.featureExtractPanel.add(featuresExtractBtn);		//Adding the feature extract button
 	     
 	     // This is the first North component
 	     dockPanel.add(new HTML("<h1> JIRTBIOSS ADMINISTRATION </h1> <hr />"), 
@@ -161,7 +188,8 @@ public class Administration extends Composite{
 			userAccessLevel.addItem("1");
 			userAccessLevel.addItem("2");
 			
-	      this.adminServiceImpl.getListOfusers();     //this is loaded a list when this page opens
+	      this.adminServiceImpl.getListOfusers();     //this is loaded a list of users when this page opens
+	      this.adminServiceImpl.getAllSpecies();       //this is loaded a list of species when this page opens	
 					
 	      //Add click handelers to Buttons
 	      this.listUsersBtn.addClickHandler(new ListUsersBtnClickHandler());
@@ -178,10 +206,17 @@ public class Administration extends Composite{
 	      this.addLooksLikeBtn.addClickHandler(new AddLooksLikeBtnClickHandler());
 	      this.studyConfigListBtn.addClickHandler(new StudyConfigListBtnClickHandler());
 	      this.addImagePathsBtn.addClickHandler(new AddImagePathsBtnClickHndler());
-	      this.extractHogFeatBtn.addClickHandler(new ExtractHogFeatBtnClickHandler());
-	      this.extractSiftFeatBtn.addClickHandler(new ExtractSiftFeatBtnClickHandler());
-	      this.extractLbpFeatBtn.addClickHandler(new ExtractLbpBtnClickHandler());
+	      this.featuresExtractBtn.addClickHandler(new featuresExtractBtnClickHandler());
+	      this.speciesListBox.addChangeHandler(new speciesListBoxChangeHandler());
+	      this.featuresListBox.addChangeHandler(new featuresListBoxChangeHandler());
 	      
+	}
+	//Populate species list box
+	public void populateSpeciesListBox(Species configListOfSpecies) {
+		final List<Species> dbListOfSpecies = configListOfSpecies.getListOfSpecies();
+		for(Species theSpecies: dbListOfSpecies){
+			speciesListBox.addItem(theSpecies.getSpeciesName());
+		}
 	}
 	//Method called when listUsersBtn Button is clicked
 	public void displayUsers(Users usersList){
@@ -696,6 +731,7 @@ public class Administration extends Composite{
 			configPanel.add(WestPanelTitile);
 			configButtons.add(addLooksLikeBtn);
 			configButtons.add(listSpeciesBtn);
+			
 			//add the title and the button to add a study
 			configPanel.add(configButtons);
 			
@@ -808,39 +844,34 @@ public class Administration extends Composite{
 			public void onClick(ClickEvent event) {
 				selectedButtonsPanel.clear();
 				adminServiceImpl.getImageNames();
+				
+				//addImagePathsBtn.setVisible(false);
+				configButtons.remove(addImagePathsBtn);
 			}
 			
 		}
 		//FEATURE EXTRACTION BUTTONS IMPLEMENTATIONS
-		private class ExtractHogFeatBtnClickHandler implements ClickHandler{		//This is for HOG Feature extraction implementation
+		private class featuresExtractBtnClickHandler implements ClickHandler{		//This is for HOG Feature extraction implementation
 
 			@Override
 			public void onClick(ClickEvent event) {
 				selectedButtonsPanel.clear();
-				adminServiceImpl.extractFeatures("HOG");
+				if(speciesListBox.isItemSelected(0)) {
+					Window.alert("Please select species to extract features for!!");
+				}
+				else if (featuresListBox.isItemSelected(0)) {
+					Window.alert("Please select the type of feature to extract!!");
+				}else {
+					adminServiceImpl.extractFeatures(selectedFeature, selectedSpecies);
+					//Reset the list boxes
+					speciesListBox.setItemSelected(0, true);
+					featuresListBox.setItemSelected(0, true);
+				}
 				
 			}
 			
 		}
-		private class ExtractSiftFeatBtnClickHandler implements ClickHandler{
-
-			@Override
-			public void onClick(ClickEvent event) {
-				selectedButtonsPanel.clear();
-				adminServiceImpl.extractFeatures("SIFT");
-			}
-			
-		}
-		private class ExtractLbpBtnClickHandler implements ClickHandler{
-
-			@Override
-			public void onClick(ClickEvent arg0) {
-				selectedButtonsPanel.clear();
-				adminServiceImpl.extractFeatures("LBP");
-			}
-			
-		}
-		
+		//Feature extraction completion status
 		public void featureExtractStatus(String extractStatus) {
 			selectedButtonsPanel.clear();
 			Label featExtractStatusLbl = new Label(extractStatus);
@@ -854,10 +885,29 @@ public class Administration extends Composite{
 				selectedButtonsPanel.add(imageNameLbl);
 			}
 			if(currentImageNames.size() > 1) {
-				configButtons.add(extractHogFeatBtn);
-				configButtons.add(extractSiftFeatBtn);
-				configButtons.add(extractLbpFeatBtn);
+				configButtons.add(featureExtractPanel);
 			}
 			
 		}
+		
+		//Change handler for the speciesListBox like dropdown list
+		private class speciesListBoxChangeHandler implements ChangeHandler{
+			@Override
+			public void onChange(ChangeEvent event) {
+								
+				int speciesIndex = speciesListBox.getSelectedIndex();
+				selectedSpecies = speciesListBox.getItemText(speciesIndex);
+										
+				}
+			}
+		//Change handler for the speciesListBox like dropdown list
+		private class featuresListBoxChangeHandler implements ChangeHandler{
+			@Override
+			public void onChange(ChangeEvent event) {
+				int featureIndex = featuresListBox.getSelectedIndex();
+				selectedFeature = featuresListBox.getItemText(featureIndex);
+												
+				}
+		}
+
 }

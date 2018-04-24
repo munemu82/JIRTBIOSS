@@ -169,11 +169,11 @@ public class AdminServiceClientImpl implements AdminServiceClientInt{
 		this.service.activateUser(username, new ActivateUserAsync());
 	}
 	@Override
-	public void extractFeatures(String featureType) {
-		this.service.extractFeatures(featureType, new ExtractFeaturesAsync());
+	public void extractFeatures(String featureType, String classLabel) {
+		this.service.extractFeatures(featureType, classLabel, new ExtractFeaturesAsync());
 		
 	}
-
+	
 	//ADMIN GUIs
 	public Administration getAdminGui(){
 		return this.adminGui;
@@ -266,6 +266,7 @@ private class AdminAsyncImpl implements AsyncCallback{
 			}else if(result instanceof Species){
 				Species speciesList = (Species) result;
 				adminGui.displaySpecies(speciesList);
+				adminGui.populateSpeciesListBox(speciesList);
 			}else if(result instanceof Study){
 				Study posesConfigs = (Study) result;
 				studyConfigGui.displayPoses(posesConfigs);

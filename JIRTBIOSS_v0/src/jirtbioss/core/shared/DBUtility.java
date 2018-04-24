@@ -184,7 +184,8 @@ public class DBUtility {
     		Path dir = FileSystems.getDefault().getPath(srcDir);
 	        //File sourceFile = new File(dir+"/"+file.getFileName());
     		File sourceFile = new File(dir+"/"+file);
-	        File destFile = new File(distFolder + sourceFile.getName());
+    		
+    		File destFile = new File(distFolder + sourceFile.getName());
 	        is = new FileInputStream(sourceFile);			//Source file
 	        os = new FileOutputStream(destFile);			//Destination file
 	        byte[] buffer = new byte[1024];

@@ -36,8 +36,8 @@ public class JIRTBIOSS_v0 implements EntryPoint {
 		//First setup log4/logging 
 
 		
-				//LOGIN form
-				HTML line = new HTML("<hr />");
+		//LOGIN form
+		HTML line = new HTML("<hr />");
 		//check user logged session
 		String sessionID = Cookies.getCookie("username");
 		if(sessionID !=null){

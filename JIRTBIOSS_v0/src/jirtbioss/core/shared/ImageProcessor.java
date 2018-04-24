@@ -90,5 +90,8 @@ public class ImageProcessor {
 		
 		return equalizedImg;
 	}
-
+	public String getFileExtension(String filePath) {
+    	String[] fileFullPath = filePath.split("/");
+    	return fileFullPath[fileFullPath.length-1];
+    }
 }

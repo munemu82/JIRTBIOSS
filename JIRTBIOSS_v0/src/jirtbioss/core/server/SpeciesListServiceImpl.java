@@ -17,6 +17,7 @@ import jirtbioss.core.client.model.Species;
 import jirtbioss.core.client.model.SpeciesConfiguration;
 import jirtbioss.core.client.model.Study;
 import jirtbioss.core.client.service.SpeciesListService;
+import jirtbioss.core.shared.DBUtility;
 
 import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -191,9 +192,11 @@ public class SpeciesListServiceImpl extends RemoteServiceServlet implements Spec
 		      
 		        
 		      //SECOND QUERY TO UPDATE THE IMAGE CAPTURE TO MAKE SURE THAT
-		      PreparedStatement query3 = (PreparedStatement) connection.prepareStatement("Update imagecaptures set identificationStatus = ? where imageID = ?");
-		      query3.setString(1, "y");
-		      query3.setString(2, imageId);
+		      //PreparedStatement query3 = (PreparedStatement) connection.prepareStatement("Update imagecaptures set identificationStatus = ? where imageID = ?");
+		      PreparedStatement query3 = (PreparedStatement) connection.prepareStatement("delete from imagecaptures where imageID = ?");
+			      
+		      //query3.setString(1, "y");
+		      query3.setString(1, imageId);
 		      //execute the second query to update the identified image 
 		      query3.executeUpdate(); 
 		       st.close();

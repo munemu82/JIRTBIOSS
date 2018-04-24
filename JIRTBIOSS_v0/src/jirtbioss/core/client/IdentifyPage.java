@@ -651,6 +651,7 @@ public void displayNextImage(ImagesList images){
 		// next image
 		baseImg.setUrl( imageURLs.get(index) );
 		index = (index+1<imageURLs.size()) ? index+1 : 0;
+		Window.alert("The current image is " +baseImg);
 	}else{
 		baseImg.setUrl("applicationImages/NoImage.png");
 	}
