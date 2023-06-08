@@ -8,3 +8,7 @@ Future integration include using openCV java wrapper to extract features from im
 REFERENCE FOR IMAGE LABELING 
 
 https://github.com/zxch3n/image-labeler-react
+
+
+REFERENCE for interview
+http://www.selectioncriteria-examples.com/directory/job_interview_answers.pdf
