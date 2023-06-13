@@ -12,3 +12,10 @@ https://github.com/zxch3n/image-labeler-react
 
 REFERENCE for interview
 http://www.selectioncriteria-examples.com/directory/job_interview_answers.pdf
+
+
+ARCGIS SAMPLE PROJECTS AND CODE
+https://www.esri.com/arcgis-blog/products/js-api-arcgis/developers/building-arcgis-api-for-javascript-apps-with-nextjs/
+https://www.esri.com/arcgis-blog/products/js-api-arcgis/developers/browsing-related-records-with-the-arcgis-api-for-javascript/
+All
+https://www.esri.com/arcgis-blog/?rmedium=redirect&rsource=blogs.esri.com/esri/arcgis/tag/javascript&s=#ArcGIS%20API%20for%20JavaScript&page=2
