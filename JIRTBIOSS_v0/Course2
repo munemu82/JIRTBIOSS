@@ -1,0 +1,116 @@
+Module 1 – Software collaboration
+	Version control Workflow
+Software development team must collaborate in order to be productive and have backup and recovery strategies in place. Version Control is one way to ensure this, Version Control must be complemented by tools and procedures to ensure quality and efficiency throughout the software development process.
+	Workflow
+Workflows are essential to ensure code is managed correctly and reduce mistakes from happening. Different projects will have different workflows. In this course, you’ll learn some common workflows using the Git Version Control System.
+	Continuous integration
+Continuous Integration, or CI, is used to automate the integration of code changes from multiple developers into a single main stream. Using a workflow whereby small changes are merged frequently, often many times per day, will reduce the number of merge conflicts. 
+This process is widespread in test-driven software development strategies. CI is often used to automatically compile the project and run tests on every code change to ensure that the build remains stable and prevent regressions in functionality.
+	Continuous Delivery
+Is an extension of Continuous Integration. Once the changes have been merged into the main stream, a Continuous Delivery system automatically packages the application and prepares it for deployment. This helps avoid human error when packaging the application.
+	Continuous Deployment
+Is an extension of Continuous Delivery. The goal of Continuous Deployment is to deploy and release software to customers frequently and safely. The strategy commonly involves automatically deploying to a test (also known as staging) environment first to validate the deployment package and software changes. Once validated, it can automatically deploy to the live (also known as production) environment for customers.
+
+Module 2 – Command Line
+	Unix commands
+Each Unix command has one or more options called Flags
+	Change directory command  cd
+	Move files and directories -> mv
+	What is Pipes:
+Pipes (i.e. | character) is used to pass output from one command as input to another
+	Create directory command -> mkdir
+	Printing current directory command -> pwd
+	What command do you use to search text content?
+grep
+	List files and directories command -> ls
+	What are the benefits of using command line?
+	Interacting with cloud provider platforms in a consistent way
+	Automating tasks
+	Improved performance versus Graphical User Interface
+	Additional Resources
+	Agile methodologies 
+(https://www.planview.com/resources/guide/agile-methodologies-a-beginners-guide/)
+	Installing git on mac and windows, detailed instructions
+(https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+	Bash Reference Manual (https://www.gnu.org/software/bash/manual/html_node/index.html#SEC_Contents)
+	Bash Redirections
+ (https://www.gnu.org/software/bash/manual/html_node/Redirections.html#Redirections)
+	Bash Cheatsheet
+(https://devhints.io/bash)
+	Grep Cheatsheet
+(https://devhints.io/grep)
+	Grep Manual
+(https://man7.org/linux/man-pages/man1/grep.1.html)
+	History and Timeline of Unix
+(https://unix.org/what_is_unix/history_timeline.html)
+	Unix Commands Cheatsheet
+(https://cheatography.com/jluis/cheat-sheets/bash-and-unix-commands/)
+	Vim Cheatsheet
+(https://vim.rtorr.com/)
+
+Module 3 – Working with Git
+	Configure user for local repositories
+	Sets the name you want attached to your commit transactions 
+git config –global user.name “[name]”
+	Sets the email you want attached to your commit transactions
+git config --global user.email "[email address]"
+	Enables helpful colorization of command line output
+git config --global color.ui auto
+	Creating repositories
+When starting out with a new repository, you only need to do it once; either locally, then push to GitHub, or by cloning an existing repository.
+	Turn an existing directory into a git repository
+git init
+	Clone (download) a repository that already exists on GitHub, including all of the files, branches, and commits
+git clone [url]
+
+	What is a .gitignore file?
+It is a file that is used to exclude files within local repository from being tracked with Git.
+	Working with branches
+Any commits you make will be made on the branch you're currently “checked out” to. Use git status to see which branch that is.
+	Creates a new branch
+git branch [branch-name]
+	Switches to the specified branch and updates the working directory
+git checkout [branch-name]
+	Combines the specified branch’s history into the current branch. This is usually done in pull requests, but is an important Git operation.
+git merge [branch]
+	Deletes the specified branch
+git branch -d [branch-name]
+	Synchronize changes
+Synchronize your local repository with the remote repository on GitHub.com
+	Downloads all history from the remote tracking branches
+git fetch
+	Combines remote tracking branch into current local branch
+git merge
+	Uploads all local branch commits to GitHub
+git push
+	Updates your current local working branch with all new commits from the corresponding remote branch on GitHub. git pull is a combination of git fetch and git merge
+git pull
+	Make changes
+	Browse and inspect the evolution of project files - Lists version history for the current branch
+git log
+	Lists version history for a file, including renames
+git log --follow [file]
+	Shows content differences between two branches
+git diff [first-branch]...[second-branch]
+	Outputs metadata and content changes of the specified commit
+git show [commit]
+	Snapshots the file in preparation for versioning
+git add [file]
+	Records file snapshots permanently in version history
+git commit -m "[descriptive message]"
+	Redo commits
+	Erase mistakes and craft replacement history. Undoes all commits after [commit], preserving changes locally
+git reset [commit]
+	Discards all history and changes back to the specified commit
+git reset --hard [commit]
+CAUTION! Changing history can have nasty side effects. If you need to change commits that exist on GitHub (the remote), proceed with caution. If you need help, reach out at github.community or contact support.
+	Git Key concept summary
+	git: an open source, distributed version-control system
+	GitHub: a platform for hosting and collaborating on Git repositories
+	commit: a Git object, a snapshot of your entire repository compressed into a SHA
+	branch: a lightweight movable pointer to a commit
+	clone: a local version of a repository, including all commits and branches
+	remote: a common repository on GitHub that all team member use to exchange their changes
+	fork: a copy of a repository on GitHub owned by a different user
+	pull request: a place to compare and discuss the differences introduced on a branch with reviews, comments, integrated tests, and more
+	HEAD: representing your current working directory, the HEAD pointer can be moved to different branches, tags, or commits when using git checkout
