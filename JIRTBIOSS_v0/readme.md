@@ -23,3 +23,9 @@ https://www.esri.com/arcgis-blog/?rmedium=redirect&rsource=blogs.esri.com/esri/a
 
 
 https://github.com/MentorUsama/ReactNativeTicketBooking
+https://github.com/AdityaKumawat97/MERN-BUS-APP
+https://github.com/AdityaKumawat97/AlogrithmsAndDataStructureExamples
+https://github.com/mayurisamanta/Bus-Ticket-Reservation-System
+https://github.com/mayurisamanta/Masai-Travels-RESTful-API
+USE MAJOR SOCIAL AND BIG COMPANIES EMAIL AUTHENTICATION
+https://www.passportjs.org/
