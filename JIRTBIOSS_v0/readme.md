@@ -29,3 +29,9 @@ https://github.com/mayurisamanta/Bus-Ticket-Reservation-System
 https://github.com/mayurisamanta/Masai-Travels-RESTful-API
 USE MAJOR SOCIAL AND BIG COMPANIES EMAIL AUTHENTICATION
 https://www.passportjs.org/
+
+
+https://github.com/jmamath/Seafloor-Classification
+https://towardsdatascience.com/phytoplankton-species-image-classification-using-neural-networks-c80481a8c82a
+https://www.researchgate.net/publication/322841182_A_Comparison_of_the_Deep_Learning_Methods_for_Solving_Seafloor_Image_Classification_Task
+https://www.mdpi.com/2073-8994/14/7/1487
