@@ -21,7 +21,6 @@ All
 https://www.esri.com/arcgis-blog/?rmedium=redirect&rsource=blogs.esri.com/esri/arcgis/tag/javascript&s=#ArcGIS%20API%20for%20JavaScript&page=2
 
 
-
 https://github.com/MentorUsama/ReactNativeTicketBooking
 https://github.com/AdityaKumawat97/MERN-BUS-APP
 https://github.com/AdityaKumawat97/AlogrithmsAndDataStructureExamples
@@ -35,3 +34,13 @@ https://github.com/jmamath/Seafloor-Classification
 https://towardsdatascience.com/phytoplankton-species-image-classification-using-neural-networks-c80481a8c82a
 https://www.researchgate.net/publication/322841182_A_Comparison_of_the_Deep_Learning_Methods_for_Solving_Seafloor_Image_Classification_Task
 https://www.mdpi.com/2073-8994/14/7/1487
+
+PHONE NUMBERS TO DELETE && BLOCK
+-- 0470310903 Sandrine
+-- 0406438805 Florence (Kenyan)
+-- 0411751579 Andinat (Ethiopian)
+-- 0458310344 Phoebe (Kenyan)
+-- +257 62443504 Anita (Burundi)
+-- +255 675205153 Domitila  (Tanzania)
+-- +255 67300217 Patricia  (Tanzania)
+-- +257 67387436 Grace/Rehema (Burundi)  nb
