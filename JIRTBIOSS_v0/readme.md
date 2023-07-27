@@ -61,5 +61,27 @@ KEY CHARACTERISTICS OF EFFECTIVE CM
 5) Adthere to the CM process
 6) Manage CM priorities
 
+WHAT IS CONFIGURATION CHANGE
+Changes to the current approved configuration result from additions or alterations to the design affecting the functions, performance, physical build or usage envelope of an item, system or installation. These include:
+1) the introduction of new items or systems, and removal of superseded items or systems to enhance capability or resolve a technical deficiency;
+2) modifications to existing items resulting from a capability or technical deficiency;
+3) Changes to the operational usage of the item that exceed the original design specifications;
+4) the introduction of alternative or superseding items or parts;
+5) the upgrading of software, including embedded software as may be found in data interfaces, sonar and radar systems;
+6) introduction of new or additional role equipment, including weapons; and
+7) approval of new standard repairs.
+
+WHAT OF CM ACTIVITIES THAT DO NOT RESULT CHANGE TO APPROVED CONFIGURATION
+1) approved variances to the configuration documentation;
+2) changes to servicing or other maintenance procedures, provided these do not vary the approved performance requirements, e.g. testing to a lower standard;
+3) extension or reduction of a maintenance interval;
+4) role equipment being fitted or removed, within approved combinations (i.e. within approved space, weight ad mission-requirement combinations); or
+5) incorporation of a standard repair.
+
+WHAT ARE THE KEY CHANGE MANAGEMENT PROCESS IN CONFIG 
+Create and Manage New PRs -> Impact assessment -->  Processing Variances,  --> Engineering Change Design and Approval, --> Implementing Engineering Changes
+
+
+
 
 
