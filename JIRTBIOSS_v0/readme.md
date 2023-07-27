@@ -40,8 +40,14 @@ PHONE NUMBERS TO DELETE && BLOCK
 -- 0406438805 Florence (Kenyan)
 -- 0411751579 Andinat (Ethiopian)
 -- 0458310344 Phoebe (Kenyan)
+
+
+As an integral component of the wider discipline of systems engineering, CM’s primary function is to provide and maintain an accurate status of the approved configuration of all technical equipment, as well as the incorporation status of all configuration changes throughout the lifecycle. The CM system must effectively support the management of seaworthiness and the provision of effective logistics support of all maritime equipment
 -- +257 62443504 Anita (Burundi)
 -- +255 675205153 Domitila  (Tanzania)
 -- +255 67300217 Patricia  (Tanzania)
 -- +257 67387436 Grace/Rehema (Burundi)  nb
 -- +257 61169587  Raisa (Burundi)
+
+
+
