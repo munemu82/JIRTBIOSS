@@ -83,5 +83,11 @@ Create and Manage New PRs -> Impact assessment -->  Processing Variances,  --> E
 
 
 
+BUS TICKETING APP DESIGNS AND IDEAS
+https://codecanyon.net/item/online-bus-ticket-booking-react-native-iosandroid-app-template/44695659
+https://www.udemy.com/course/mern-stack-bus-ticket-booking-app/
+
+
+
 
 
