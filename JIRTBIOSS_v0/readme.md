@@ -93,5 +93,8 @@ https://github.com/UsamaSarwar/reactnative-ecommerce-charlie
 https://github.com/ujjalacharya/awesome-ecom
 https://github.com/YashMarmat/FullStack_Ecommerce_App  (Django & React)
 
+https://www.bezkoder.com/react-node-express-postgresql/  (React and Postgress)
+https://www.udemy.com/course/react-fullstack-with-nodeexpress-psql-and-aws/
+
 
 
