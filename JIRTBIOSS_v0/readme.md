@@ -97,4 +97,8 @@ https://www.bezkoder.com/react-node-express-postgresql/  (React and Postgress)
 https://www.udemy.com/course/react-fullstack-with-nodeexpress-psql-and-aws/
 
 
+//GET COMMANDS
+git clone <URL> ./            (i.e. ./ is to copy the files into the current folder)
+
+
 
