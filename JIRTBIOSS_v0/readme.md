@@ -86,8 +86,12 @@ Create and Manage New PRs -> Impact assessment -->  Processing Variances,  --> E
 BUS TICKETING APP DESIGNS AND IDEAS
 https://codecanyon.net/item/online-bus-ticket-booking-react-native-iosandroid-app-template/44695659
 https://www.udemy.com/course/mern-stack-bus-ticket-booking-app/
+https://github.com/Fahdroussafi/Easy-Booking
+https://www.udemy.com/course/mern-stack-e-commerce-mobile-app-react-native-redux-expo/?utm_source=adwords&utm_medium=udemyads&utm_campaign=DSA_Search_la.EN_cc.AU_PP&utm_term=_._ag_137987505836_._ad_606065560683_._kw__._de_c_._dm__._pl__._ti_dsa-1677053907488_._li_1000567_._pd__._&matchtype=&gclid=EAIaIQobChMIuOyAkfzkgAMVr5hmAh3-cQnHEAAYAiAAEgJYMfD_BwE
 
-
+https://github.com/UsamaSarwar/reactnative-ecommerce-charlie
+https://github.com/ujjalacharya/awesome-ecom
+https://github.com/YashMarmat/FullStack_Ecommerce_App  (Django & React)
 
 
 
