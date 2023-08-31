@@ -100,5 +100,7 @@ https://www.udemy.com/course/react-fullstack-with-nodeexpress-psql-and-aws/
 //GET COMMANDS
 git clone <URL> ./            (i.e. ./ is to copy the files into the current folder)
 
+ECOMMERCE APP TO USE FOR MONGODB MODELS
+https://github.com/maryamaljanabi/bestbags-nodejs-ecommerce#demo
 
 
