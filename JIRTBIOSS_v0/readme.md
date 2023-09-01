@@ -103,4 +103,6 @@ git clone <URL> ./            (i.e. ./ is to copy the files into the current fol
 ECOMMERCE APP TO USE FOR MONGODB MODELS
 https://github.com/maryamaljanabi/bestbags-nodejs-ecommerce#demo
 
-
+OBJECT DETECTION
+https://github.com/jaydenhinrichsen/node-opencv-yolo
+https://alpha2phi.medium.com/yolo-using-fastapi-websocket-and-react-2b2d28e9f7ed
