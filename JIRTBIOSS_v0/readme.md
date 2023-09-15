@@ -110,3 +110,9 @@ https://alpha2phi.medium.com/yolo-using-fastapi-websocket-and-react-2b2d28e9f7ed
 SQL TESTS
 https://www.cs.odu.edu/~ibl/450/sql/
 https://www.coursehero.com/file/p4aevdf/Get-S-for-suppliers-who-supply-project-J1-SQL-select-S-from-S-where-S-in-select/
+
+PYTHON PANDAS
+https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf
+https://www.datacamp.com/cheat-sheet/pandas-cheat-sheet-for-data-science-in-python
+https://www.webpages.uidaho.edu/~stevel/cheatsheets/Pandas%20DataFrame%20Notes_12pages.pdf
+https://www.geeksforgeeks.org/pandas-cheat-sheet/
