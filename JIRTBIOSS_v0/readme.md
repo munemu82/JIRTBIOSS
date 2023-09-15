@@ -106,3 +106,7 @@ https://github.com/maryamaljanabi/bestbags-nodejs-ecommerce#demo
 OBJECT DETECTION
 https://github.com/jaydenhinrichsen/node-opencv-yolo
 https://alpha2phi.medium.com/yolo-using-fastapi-websocket-and-react-2b2d28e9f7ed
+
+SQL TESTS
+https://www.cs.odu.edu/~ibl/450/sql/
+https://www.coursehero.com/file/p4aevdf/Get-S-for-suppliers-who-supply-project-J1-SQL-select-S-from-S-where-S-in-select/
