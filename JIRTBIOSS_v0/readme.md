@@ -116,3 +116,12 @@ https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf
 https://www.datacamp.com/cheat-sheet/pandas-cheat-sheet-for-data-science-in-python
 https://www.webpages.uidaho.edu/~stevel/cheatsheets/Pandas%20DataFrame%20Notes_12pages.pdf
 https://www.geeksforgeeks.org/pandas-cheat-sheet/
+
+
+TARP RPR REVIEW PROCEESS
+-- General information, checks of process and conventions
+-- Standard Activities
+-- TMPs (Technical Maintenance Plans)
+-- AD514s forms (AD514-1 Change Impact Assessment & AD514-2 Change Incorporation Report i.e. CIR)
+-- Technical Documentation review (Drawing, Design and Ship System technical manuals etc..)
+-- ILS (Checks of logistics data, NSNs and stock codes etc... to identify and establish relationship between logistics and config data, e.g. a Configuration Item i.e. CI in CMTU should be linked to an NSN/Stock code in NAVALLOW )
