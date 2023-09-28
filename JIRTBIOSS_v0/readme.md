@@ -128,10 +128,10 @@ TARP RPR REVIEW PROCEESS
 
 
 QUESTIONS ASKED IN WESTPAC INTERVIEW
--- You are running a SQL query and it is taking too long (hours) to complete, what are the steps you would take to improve the query's performance
--- In a database, how many clustered and Non-clustered indexes can you have?
+1) You are running a SQL query and it is taking too long (hours) to complete, what are the steps you would take to improve the query's performance
+2) In a database, how many clustered and Non-clustered indexes can you have?
 ANSWER:
  Only one clustered index and 1 or more Non clustered indexes (Non clustered indexes can be created for any table column)
--- Explain the difference between CTEs (Common Table Expressions), Temporary tables and Subquery
--- For CTEs, Temporary tables and Subqueries, in terms of performance, which one would you use and in what scenario
--- What is SQL Merge statement, explain how it is used
+3) Explain the difference between CTEs (Common Table Expressions), Temporary tables and Subquery
+4) For CTEs, Temporary tables and Subqueries, in terms of performance, which one would you use and in what scenario
+5) What is SQL Merge statement, explain how it is used
