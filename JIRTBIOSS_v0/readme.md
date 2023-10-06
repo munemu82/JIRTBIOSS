@@ -134,3 +134,18 @@ ANSWER: Only one clustered index and 1 or more Non clustered indexes (Non cluste
 3) Explain the difference between CTEs (Common Table Expressions), Temporary tables and Subquery
 4) For CTEs, Temporary tables and Subqueries, in terms of performance, which one would you use and in what scenario
 5) What is SQL Merge statement, explain how it is used
+
+DATA ENGINEERING CERTIFICATIONS
+1) Databricks
+   https://www.databricks.com/learn/certification/data-engineer-associate
+   https://www.udemy.com/course/databricks-certified-data-engineer-associate/
+   https://www.udemy.com/course/practice-exams-databricks-certified-data-engineer-associate/
+   https://www.udemy.com/course/azure-databricks-and-spark-sql-python/
+
+Need to compare Udemy courses with https://customer-academy.databricks.com/learn/course/external/view/elearning/1800/data-engineering-with-databricks
+3) Microsoft
+  https://www.udemy.com/course/data-engineering-on-microsoft-azure/
+  https://www.udemy.com/course/dp200exam/
+  Make sure Udemy courses topics matches microsoft 
+   https://learn.microsoft.com/en-us/credentials/certifications/azure-data-engineer/
+4) 
