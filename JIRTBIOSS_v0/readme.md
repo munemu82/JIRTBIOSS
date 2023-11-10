@@ -149,3 +149,158 @@ Need to compare Udemy courses with https://customer-academy.databricks.com/learn
   Make sure Udemy courses topics matches microsoft 
    https://learn.microsoft.com/en-us/credentials/certifications/azure-data-engineer/
 4) 
+
+APP  MAIN MODULES    -- REFERENCE https://www.sharetribe.com/how-to-develop/marketplace-app/
+1) BACKEND
+The marketplace backend. The backend is your marketplace’s beating heart. It’s where user-generated data is stored in a database and where your transaction engine with all user functionality lives. In chapter two of this article, I’ll list all the essential features your backend should power and outline the general project flow of building a marketplace app from scratch.
+
+2) ADMIN UI
+The Admin UI. Think of your admin UI as something between your marketplace backend and your user interface. It reports all your marketplace activity and lets you monitor and manage users, notifications, messages, transactions, and reviews. The admin features need to be built in the backend, and they’ll need a graphical user interface, too.The Admin UI. Think of your admin UI as something between your marketplace backend and your user interface. It reports all your marketplace activity and lets you monitor and manage users, notifications, messages, transactions, and reviews. The admin features need to be built in the backend, and they’ll need a graphical user interface, too.
+
+3)USER UI
+   The User Interface. The UI is the branded and beautifully designed website or mobile app that your users interact with. You need different sections and features for sellers and customers, listing pages, user profiles, and content pages. The User Interface can be a web application (used through the browser with a desktop, tablet, or phone) or a native mobile application (downloaded through an app store). 
+
+APP FEATURES
+1. Account & user profile management
+Features needed:
+
+Sign in
+Login
+Email integration
+Verify email
+Forgot password
+Change email
+Ban account
+Delete account
+GDPR-compliance
+Social logins (Facebook, Google, Twitter, LinkedIn, Github, etc.)
+User profiles (First name, last name, bio)
+Additional profile information
+Upload profile picture
+On a marketplace, both sellers and buyers typically have accounts and user profiles. So, you’ll need a standard sign-up and profile creation flow for both user groups. You’ll also need to store the account info in a way that is secure and compliant with local legal requirement
+
+2. Listing management
+   Features needed:
+
+Basic listing information: title, description, price
+Additional fields 
+Update and delete listings
+Close listings
+Draft listings
+Listing approval
+Upload listing images
+Listing geolocation
+Pricing information
+Listing variations
+Listings are, essentially, the product that your marketplace offers. You’ll want them to be informative, appealing, and complete so you can maximize conversions.
+
+3. Search & discoverability
+   Features needed:
+Map
+Location search
+Location auto-complete
+Listing categories
+Filtered search
+Keyword search
+Availability search
+If marketplace customers won’t find what they’re looking for on your marketplace, none of your other features really matters. Here’s a thorough article that might help you design your marketplace discovery. 
+
+4. Transaction process
+   On-site messaging tools
+Notifications (email integration/SMS integration/push notifications)
+Pricing options (fixed/dynamic/seasonal/negotiation, add-ons)
+Cancellation policies
+Automatic expiration
+Charging a commission
+Delayed payouts and refund management
+Invoicing
+Reviews after transaction
+Taxes
+PDF receipts
+Instead of designing and implementing just one type of process, I strongly recommend building a “transaction engine” where multiple different versions of your transaction process can progress at the same time. More on that in chapter 3.7.
+
+Designing a transaction flow means defining the stages of user interaction (e.g. making a booking request, accepting it, and leaving a review) and transaction outcomes (e.g. successful, rejected, or cancelled). 
+
+5. Payment integration
+   Features needed:
+
+Choose a payment gateway with support for the geographies, payment methods, and currencies you need
+Build an integration with the help of Redirect URLs and Return URLs, Webhooks, or API access.
+Seller-onboarding flow that fulfills Know Your Customer (KYC) requirements
+Authorize and capture payments
+Handle 3D Security / Strong Customer Authentication
+Refund
+Delayed payout
+Split payment between the seller and the marketplace
+Marketplace payments are subject to all kinds of regulation that traditional eCommerce avoids. With eCommerce, there's only one entity that receives payouts: the shop owner. On a marketplace, all the sellers receive payouts. 
+
+In the world of online payments, paying money is easy, but payouts are hard. Payouts are subject to all kinds of regulation, anti-money-laundering legislation, and fraud-prevention measures. Global payouts are especially challenging. To make things even more complicated, most marketplaces also need to split every payment from a customer. One part of that payment goes to the seller as a payout, and another to the marketplace as the service fee.
+
+6. Booking and Availability
+   Features needed:
+
+Booking calendar for buyers
+Availability management calendar for sellers
+Support for different time zones
+Handle Daylight Savings changes etc.
+Stock management
+Seats
+Ability to filter search by availability
+The marketplace with the best-quality supply is the marketplace that wins over the customers. To make your marketplace defensible against competitors, give your sellers powerful features to manage their offering
+
+7. Admin features
+   Features needed:
+
+Intuitive Admin UI
+User search
+User account status
+User management
+Managing products or services that are being sold
+Access to all user-generated content
+Access to messages
+Ability to manage transactions
+Notification management
+And more.
+On the best marketplaces, the admin console is almost like an app of its own. Your admin features help you manage activity, learn about your users, and identify improvement areas where you can boost conversion, transaction quality, and retention.
+
+8. Marketing and Com
+   Features needed:
+
+Email integration 
+SEO
+CRM
+The exact marketing and communications features you need will depend on your marketplace idea and audience. 
+
+9. Hosting, monitoring, security
+Features needed:
+
+
+Hosting (e.g. AWS or Heroku)
+Maintenance
+Performance monitoring
+Error tracking
+Logging
+Alerting when the app is unavailable / performing slowly
+Audit logs
+Security and privacy
+Scalable data storage
+Auto-scaling (or at least ability to manually scale your infrastructure in case of traffic spikes)
+On a marketplace that reaches a meaningful scale, maintenance work is daily. Sooner or later, you’ll need a full-time DevOps person to manage your architecture and maintain and update configurations and integrations. You’ll also need a robust security and performance monitoring system in place. If something goes wrong at 2 AM, someone needs to get an alert, get up, and handle the situation.
+
+You’ll also need an infrastructure with auto-scaling support, or at least the ability to manually scale up your servers quickly in the case of traffic spikes. If your marketplace goes viral but your site is unavailable because your servers can't handle the load, you might miss a once-in-a-lifetime chance.
+
+
+CHOOSING TECH STACK
+1. Front end tech
+   -> React && bootstrap
+3. Backend tech
+  -> NodeJs & Express
+  ->  A relational SQL database is a safe choice. The frameworks tend to have good support for SQL databases out of the box. Choose e.g. PostgreSQL or MySQL. It's also good to check if your hosting provider has any preferences. For example, Heroku prefers PostgreSQL.
+   PostgreSQL has support for full-text search and support for extensions such as PostGIS that add support for location-based queries. Even if you start without a search engine, it may be that you need to introduce one at some point.
+
+APP REFERENCES AND DOCUMENTATION TO READ
+https://www.linkedin.com/pulse/how-can-you-build-on-demand-marketplace-app-react-native?trk=article-ssr-frontend-pulse_more-articles_related-content-card
+https://javascript.plainenglish.io/build-an-on-demand-marketplace-app-with-react-native-2a466270dc32
+https://www.vtnetzwelt.com/case-studies/marketplace-app-using-react-native/
+
+
