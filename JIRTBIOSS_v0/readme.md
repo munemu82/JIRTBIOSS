@@ -304,3 +304,8 @@ https://javascript.plainenglish.io/build-an-on-demand-marketplace-app-with-react
 https://www.vtnetzwelt.com/case-studies/marketplace-app-using-react-native/
 
 
+https://medium.com/angular-in-depth/building-an-api-with-firebase-6108a207c1fd
+https://www.bezkoder.com/deploy-node-js-app-heroku-cleardb-mysql/
+https://lo-victoria.com/build-a-mysql-nodejs-crud-app-4-deploying-to-heroku-finale
+
+https://medium.com/codex/full-stack-app-development-w-flutter-nodejs-mysql-and-heroku-caeba4671107
