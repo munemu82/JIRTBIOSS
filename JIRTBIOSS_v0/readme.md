@@ -309,3 +309,6 @@ https://www.bezkoder.com/deploy-node-js-app-heroku-cleardb-mysql/
 https://lo-victoria.com/build-a-mysql-nodejs-crud-app-4-deploying-to-heroku-finale
 
 https://medium.com/codex/full-stack-app-development-w-flutter-nodejs-mysql-and-heroku-caeba4671107
+
+GOOD ARCGIS REACT LESSONS
+https://www.youtube.com/watch?v=u-v82fGJT9g&list=PLICcoqc_NNmBQuleIfFFRxFHQr6xaabrE&index=4
