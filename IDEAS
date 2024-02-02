@@ -13,12 +13,18 @@ LIST OF IDEAS TO TRY
 FASTAPI - Github repositories to use as templates
 ->https://github.com/Olukeye/fastapi-shop-app/tree/main
 ->https://github.com/app-generator/ecommerce-fastapi-stripe   - DOCS https://medium.com/@appseed.us/fastapi-stripe-free-ecommerce-starter-dd9a207b5479
--> https://github.com/Devansh3712/tsuki/tree/main
+-> https://github.com/Devansh3712/tsuki/tree/main       --- WORKING TEMPLATE
 ->https://www.toptal.com/python/build-high-performing-apps-with-the-python-fastapi-framework
 ->https://github.com/tiangolo/full-stack-fastapi-postgresql
 https://github.com/Kludex/awesome-fastapi-projects?tab=readme-ov-file
-->https://gitlab.com/CollinsMunene/FastApi-E-commerce-Applications-Endpoints-
--> https://github.com/skatesham/fastapi-bigger-application/tree/master
+->https://gitlab.com/CollinsMunene/FastApi-E-commerce-Applications-Endpoints-   --- WORKING TEMPLATE
+-> https://github.com/skatesham/fastapi-bigger-application/tree/master    --- TO BE USED AS WORKING & REFERENCE TEMPLATE  comment #from .src.dependencies import get_query_token, get_token_header on the main.py file
 ->https://medium.com/@stanker801/creating-a-crud-api-with-fastapi-sqlalchemy-postgresql-postman-pydantic-1ba6b9de9f23
 
 https://www.seek.com.au/job/72982188?type=promoted&ref=search-standalone#sol=2df9d71e44f660c6fad6b8ac6c06bac6a41809cf
+
+CONFIGURING FASTAPI TO USE DATABASE
+-> https://fastapi.tiangolo.com/tutorial/sql-databases/
+
+MICROSOFT SHAREPOINT FRAMEWORK
+-> https://www.youtube.com/watch?v=TlSGdDZmrTM
