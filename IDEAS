@@ -14,7 +14,8 @@ FASTAPI - Github repositories to use as templates
 ->https://github.com/Olukeye/fastapi-shop-app/tree/main
 ->https://github.com/app-generator/ecommerce-fastapi-stripe   - DOCS https://medium.com/@appseed.us/fastapi-stripe-free-ecommerce-starter-dd9a207b5479
 -> https://github.com/Devansh3712/tsuki/tree/main       --- WORKING TEMPLATE
-->https://www.toptal.com/python/build-high-performing-apps-with-the-python-fastapi-framework
+->https://www.toptal.com/python/build-high-performing-apps-with-the-python-fastapi-framework  ----- GOOD REFERENCE FOR AUTHENTICATION - JWT
+https://medium.com/oceanbase-database/building-a-headless-e-commerce-app-using-oceanbase-and-python-940619d125b5----- GOOD REFERENCE FOR ENVIRONMENT VARIABLES - JWT
 ->https://github.com/tiangolo/full-stack-fastapi-postgresql
 https://github.com/Kludex/awesome-fastapi-projects?tab=readme-ov-file
 ->https://gitlab.com/CollinsMunene/FastApi-E-commerce-Applications-Endpoints-   --- WORKING TEMPLATE
